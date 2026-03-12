@@ -19,7 +19,7 @@
     --dim: #4a6580;
     --teal: #42F0CD;
     --teal-soft: #10D1B7;
-    --rule: #1a2f48;
+    --rule: #043C67;
     --tag-bg: #42F0CD;
     --tag-fg: #00172E;
   }
@@ -115,13 +115,21 @@
     text-transform: uppercase;
     color: var(--mid);
   }
+  .hero-welcome {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--mid);
+    margin-top: 1.25rem;
+    max-width: 760px;
+  }
 
   /* ── DON'T SLEEP ON WEB ── */
   .dont-sleep {
     max-width: 760px;
     margin: 2.5rem auto 0;
-    background: #043C67;
-    border-radius: 16px;
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-radius: 14px;
     padding: 2.25rem 2.5rem;
   }
   .dont-sleep-label {
@@ -251,17 +259,14 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 1px;
-    background: var(--rule);
+    background: var(--navy-border);
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid var(--rule);
+    border: 1px solid var(--navy-border);
   }
   .stat {
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--navy-card);
     padding: 1.5rem 1.5rem;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
   }
   .stat:first-child { border-radius: 13px 0 0 13px; }
   .stat:last-child { border-radius: 0 13px 13px 0; }
@@ -496,7 +501,7 @@
 <!-- TOP NAV -->
 <nav class="top-nav">
   <a href="index.html" class="active">Issue 01</a>
-  <a href="about.html">About the Web Team</a>
+  <a href="about.html">About the Web Program</a>
 </nav>
 
 <!-- STICKY TOC -->
@@ -518,36 +523,20 @@
     <span>Issue 01 &nbsp;·&nbsp; Jan–Feb 2026</span>
   </div>
   <h1>The web we <span class="accent">weave</span></h1>
-  <div class="hero-sub">A monthly digest from the Plaid web team</div>
+  <div class="hero-sub">A monthly digest from the Plaid web program</div>
+  <p class="hero-welcome">Welcome to The Web We Weave, a monthly window into what's happening on Plaid.com. Web moves fast and a lot of it happens quietly, so this update is our attempt to wrangle and showcase the best of it. Future editions will be monthly, but issue 01 is coming out the gate as a double debut. Let's ride.</p>
 </div>
 
 <div class="holo-strip" style="margin-bottom: 2rem;"></div>
 
-<!-- WELCOME -->
-<div class="welcome">
-  <div class="welcome-label">📣</div>
-  <div class="welcome-body">
-    <p>Welcome to The Web We Weave, a monthly window into what's happening on plaid.com. Web moves fast and a lot of it happens quietly. This first issue covers January and February — a lot shipped (aka the web team threw down). Serious, zero shame about the double debut.</p>
-  </div>
-</div>
-
-<!-- ISSUE BANNER -->
-<div class="issue-banner">
-  <div class="issue-banner-label">Issue 01</div>
-  <div class="issue-banner-rule"></div>
-  <div class="issue-banner-title">January &amp; February 2026</div>
-</div>
-
 <!-- DON'T SLEEP ON WEB -->
 <div class="dont-sleep">
   <div class="dont-sleep-label">TLDR</div>
-  <p class="dont-sleep-headline">If you read nothing else</p>
+  <p class="dont-sleep-headline">If you read nothing else: Issue 01</p>
   <p class="dont-sleep-body">Hey you — don't sleep on web. Web is a growth engine. A 10% lift in session-to-MQL conversion on plaid.com translates to about $2.4 million in incremental pipeline. This isn't a marketing site — it's the front door to every product launch, campaign, and industry narrative Plaid puts into the world.</p>
   <p class="dont-sleep-body">In January and February alone: 12+ customer-facing surfaces shipped, a site-wide nav experiment launched, two major dependency upgrades landed, and Plaid's AI story finally had a home on the web.</p>
-  <p class="dont-sleep-body">The web team threw down. Here's the receipts.</p>
+  <p class="dont-sleep-body">The web program threw down. Here's the receipts.</p>
 </div>
-
-<div class="holo-strip" style="margin: 2rem auto 0;"></div>
 
 <div class="container">
 
@@ -797,7 +786,7 @@
 
   <!-- FOOTER -->
   <div class="footer">
-    <p><strong>The Web We Weave</strong> is a monthly digest from the Plaid web team — rounding up what shipped, what was learned, and what's coming on plaid.com. Questions or additions? Drop them in <strong>#website-open</strong>.</p>
+    <p><strong>The Web We Weave</strong> is a monthly digest from the Plaid web program — rounding up what shipped, what was learned, and what's coming on plaid.com. Questions or additions? Drop them in <strong>#website-open</strong>.</p>
   </div>
 
 </div>
