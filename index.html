@@ -1,0 +1,607 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;The Web We Weave — Issue 01&lt;/title&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--navy: #0d1b2e;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--navy-mid: #122035;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--navy-card: #152338;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--navy-border: #1e3050;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--fg: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--mid: #8ba3be;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--dim: #4a6580;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--teal: #3ecfcf;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--teal-soft: #2ab8c4;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--rule: #1a2f48;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--tag-bg: #3ecfcf;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--tag-fg: #0d1b2e;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--navy);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--fg);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Inter', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 0 1.25rem 5rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--dim); transition: text-decoration-color 0.15s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>a:hover { text-decoration-color: var(--teal); color: var(--teal); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── HERO ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>max-width: 760px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 0 0 3rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero-canvas-wrap {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 220px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: -1rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>#waveCanvas {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero-meta {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.62rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding-top: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-top: 1px solid var(--rule);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero h1 {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: clamp(2.75rem, 8vw, 5rem);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.03em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 1.25rem 0 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero h1 .accent { color: var(--teal); font-weight: 700; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero-sub {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.65rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── WELCOME ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.welcome {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>max-width: 760px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.04);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>-webkit-backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(255,255,255,0.08);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 1.25rem 1.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: baseline;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.welcome-label {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>white-space: nowrap;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding-top: 0.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.welcome-body { flex: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.welcome p {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.82rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.65;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: inline;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.welcome p + p::before { content: ' '; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.welcome-sig {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: inline;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.82rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--dim);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── ISSUE BANNER ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.issue-banner {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>max-width: 760px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 1.5rem auto 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 1rem 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--navy-card);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--navy-border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.issue-banner-label {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.62rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.issue-banner-rule { flex: 1; height: 1px; background: var(--rule); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.issue-banner-title {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.8rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.1em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--teal);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── CONTAINER ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.container { max-width: 760px; margin: 0 auto; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>section { padding: 3rem 0; border-bottom: 1px solid var(--rule); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>section:last-of-type { border-bottom: none; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── SECTION HEADER ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.section-header {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: baseline;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.section-title {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: clamp(1.75rem, 4.5vw, 2.75rem);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.025em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.05;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.section-title .accent { color: var(--teal); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.section-label {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.62rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>white-space: nowrap;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── STAT BAR ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stat-bar {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--rule);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--rule);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stat {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.03);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>-webkit-backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 1.5rem 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stat:first-child { border-radius: 13px 0 0 13px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stat:last-child { border-radius: 0 13px 13px 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stat-number {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 2.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.04em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--teal);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.stat-label {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.68rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 0.4rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.4;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── SHIP GROUPS ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship-group {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--navy-card);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--navy-border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 0 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship-group:last-child { margin-bottom: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship-group-title {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.62rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--teal);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 1rem 0 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--rule);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: 1fr auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 0.2rem 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: start;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 1rem 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--rule);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship:last-child { border-bottom: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship-name { font-size: 0.95rem; font-weight: 600; line-height: 1.3; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship-name a { text-decoration: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship-name a:hover { color: var(--teal); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship-desc { font-size: 0.82rem; color: var(--mid); margin-top: 0.2rem; grid-column: 1; line-height: 1.55; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship-link {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.6rem; font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.12em; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--dim); text-decoration: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>white-space: nowrap; padding-top: 0.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: color 0.15s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.ship-link:hover { color: var(--teal); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── LEARNINGS ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.learning {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 1.25rem 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--rule);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: 1.75rem 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 0 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.learning:last-child { border-bottom: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.learning-icon { font-size: 0.95rem; padding-top: 0.1rem; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.learning-text strong { font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 0.3rem; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.learning-text p { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── NEXT ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.next-item {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex; justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center; padding: 1rem 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--rule); gap: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.next-item:last-child { border-bottom: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.next-name { font-size: 0.9rem; font-weight: 600; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.next-desc { font-size: 0.8rem; color: var(--mid); margin-top: 0.2rem; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tag {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase; background: var(--tag-bg);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--tag-fg); padding: 0.3rem 0.7rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 999px; white-space: nowrap; flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tag.soon {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: transparent; color: var(--mid);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--dim);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── SHOUTOUTS ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.shoutout {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 1.5rem 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(255,255,255,0.08);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.04);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(16px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>-webkit-backdrop-filter: blur(16px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.shoutout:last-child { margin-bottom: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.shoutout-award {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.6rem; font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.14em; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid); margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.shoutout-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.shoutout-body { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* ── FOOTER ── */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.footer {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 2.5rem 0 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.72rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.7;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-top: 1px solid var(--rule);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- HERO --&gt;</p>
+<p class="p1">&lt;div class="hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hero-canvas-wrap"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;canvas id="waveCanvas"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hero-meta"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span&gt;The Web We Weave&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span&gt;Issue 01 &amp;nbsp;·&amp;nbsp; Jan–Feb 2026&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;The web we &lt;span class="accent"&gt;weave&lt;/span&gt;&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hero-sub"&gt;A monthly digest from the Plaid web team&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- WELCOME --&gt;</p>
+<p class="p1">&lt;div class="welcome"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="welcome-label"&gt;Note&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="welcome-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;Welcome to The Web We Weave, a monthly window into what's happening on plaid.com. Web moves fast and a lot of it happens quietly. This first issue covers January and February — a lot shipped (aka the web team threw down). Serious, zero shame about the double debut.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="welcome-sig"&gt; — The web team 🕸️&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- ISSUE BANNER --&gt;</p>
+<p class="p1">&lt;div class="issue-banner"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="issue-banner-label"&gt;Issue 01&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="issue-banner-rule"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="issue-banner-title"&gt;January &amp;amp; February 2026&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="container"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- BY THE NUMBERS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;By the &lt;span class="accent"&gt;numbers&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-label"&gt;Jan–Feb 2026&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="stat-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-number"&gt;12+&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-label"&gt;Customer-facing surfaces shipped&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-number"&gt;7&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-label"&gt;Net-new or fully revamped use case pages&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-number"&gt;2&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-label"&gt;New industry pillars&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-number"&gt;3&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-label"&gt;Nav variants live in experiment&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- WHAT SHIPPED --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;What &lt;span class="accent"&gt;shipped&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-label"&gt;12+ surfaces&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ship-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship-group-title"&gt;Payments&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank"&gt;Outbound Bank Payments&lt;/a&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;A revamped story for getting money out the door: auto rail selection, instant account verification, and fraud signals that keep payouts moving.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank"&gt;View →&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank"&gt;Inbound Bank Payments&lt;/a&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;The other side of the flow. Higher-converting bank checkout, fewer failures, and real-time balance checks that make pay-by-bank predictable.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank"&gt;View →&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ship-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship-group-title"&gt;Financial Management&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/use-cases/earned-wage-access/" target="_blank"&gt;Earned Wage Access (EWA)&lt;/a&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;How Plaid helps EWA providers qualify more users, assess repayment risk from real cash-flow data, and reduce losses with better timing.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/use-cases/earned-wage-access/" target="_blank"&gt;View →&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank"&gt;Personal Financial Management (PFM)&lt;/a&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;The "how top personal finance apps are built" page — clean enriched data, real-time transaction sync, AI-enhanced categorization.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank"&gt;View →&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/use-cases/business-financial-management/" target="_blank"&gt;Business Financial Management (BFM)&lt;/a&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;A cash-flow and expense story for SMBs: structured business data, real-time balances, and smoother payroll and invoice flows.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/use-cases/business-financial-management/" target="_blank"&gt;View →&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ship-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship-group-title"&gt;Industries&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/industries/insurance/" target="_blank"&gt;Insurance&lt;/a&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;A full-funnel industry pillar covering fraud, premium collection, payouts, and underwriting — from quote to claim.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/industries/insurance/" target="_blank"&gt;View →&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/industries/ai/" target="_blank"&gt;AI Companies&lt;/a&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;The first page built for AI-first builders: real financial context for agents, identity and access controls, pay-by-bank rails for agentic commerce.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/industries/ai/" target="_blank"&gt;View →&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ship-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship-group-title"&gt;AI &amp;amp; Intelligent Finance&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/intelligent-finance/" target="_blank"&gt;Intelligent Finance Hub&lt;/a&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;Plaid's first full-stack public AI story. Defines intelligent finance, introduces &lt;a href="https://plaid.com/intelligent-finance/"&gt;Plaid Intelligence&lt;/a&gt;, and positions Plaid at the infrastructure layer — not as another AI app.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/intelligent-finance/" target="_blank"&gt;View →&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ship-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship-group-title"&gt;Everything else&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/products/" target="_blank"&gt;All Products Page&lt;/a&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;A new front door into everything Plaid sells — launched alongside the nav experiment to replace the scattered product-page experience. &lt;em style="color:var(--teal);font-style:normal;"&gt;Note: already being reworked for a March relaunch.&lt;/em&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/products/" target="_blank"&gt;View →&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- LEARNINGS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;Learnings &amp;amp; &lt;span class="accent"&gt;experiments&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-label"&gt;4 takeaways&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="learning"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-icon"&gt;📐&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-text"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;Shorter pages convert better for paid traffic&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;An experiment sent 50% of paid traffic to a shortened &lt;a href="https://plaid.com/products/auth/"&gt;Auth product page&lt;/a&gt; and produced a statistically significant conversion lift — enough to make it the default for that segment. The CTA-first, cut-the-fat approach works when the audience already has intent.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="learning"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-icon"&gt;🧭&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-text"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;The right IA is still an open question — so it's being tested&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;A site-wide nav experiment is live with three variants across desktop and mobile, split via LaunchDarkly with results flowing into Databricks. The core question: how should plaid.com be structured to tell a product + solution + industry story without losing people? Real data incoming.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="learning"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-icon"&gt;🗺️&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-text"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;Use case pages are now reusable patterns, not one-offs&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Payments and Financial Management established a repeatable structure: context → value → how it works → proof. Written for the practitioner, not the API. A solid reference for the next wave of use case pages.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="learning"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-icon"&gt;🤖&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-text"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;AI copy needs scaffolding, not buzzwords&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;The &lt;a href="https://plaid.com/intelligent-finance/"&gt;Intelligent Finance launch&lt;/a&gt; set a tone for AI writing at Plaid: more explanation, clearer hierarchy, less "AI-powered everything." Anchoring to the infrastructure layer — data + models + trust — gave the copy something concrete to stand on.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- SHOUTOUTS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;Shout&lt;span class="accent"&gt;outs&lt;/span&gt; 👏&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-label"&gt;Well deserved&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="shoutout"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-award"&gt;🏆 Ship of the bimonth&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-title"&gt;Plaid's AI story, live on the site&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-body"&gt;Between the &lt;a href="https://plaid.com/intelligent-finance/"&gt;Intelligent Finance hub&lt;/a&gt; and the new &lt;a href="https://plaid.com/industries/ai/"&gt;AI Companies industry page&lt;/a&gt;, this was the month Plaid's AI narrative finally had a home on the web. Two pages, one cohesive point of view: Plaid as the financial infrastructure layer that makes AI in finance actually work.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="shoutout"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-award"&gt;🔁 Pattern of the bimonth&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-title"&gt;Use case + industry web system&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-body"&gt;Seven pages. Two industry pillars. One repeatable structure that didn't exist six months ago. Use case storytelling finally lives on the site, not just in decks. See it: &lt;a href="https://plaid.com/use-cases/inbound-bank-payments/"&gt;Inbound&lt;/a&gt;, &lt;a href="https://plaid.com/use-cases/outbound-bank-payments/"&gt;Outbound&lt;/a&gt;, &lt;a href="https://plaid.com/use-cases/earned-wage-access/"&gt;EWA&lt;/a&gt;, &lt;a href="https://plaid.com/use-cases/personal-financial-insights/"&gt;PFM&lt;/a&gt;, &lt;a href="https://plaid.com/use-cases/business-financial-management/"&gt;BFM&lt;/a&gt;, &lt;a href="https://plaid.com/industries/insurance/"&gt;Insurance&lt;/a&gt;, &lt;a href="https://plaid.com/industries/ai/"&gt;AI companies&lt;/a&gt;.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="shoutout"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-award"&gt;🧪 Experiment of the bimonth&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-title"&gt;Nav + Auth tests&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-body"&gt;For actually using experiments to answer real design questions instead of just shipping and hoping. The &lt;a href="https://plaid.com/products/auth/"&gt;Auth short-form&lt;/a&gt; result alone was worth it.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- FOOTER --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="footer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;&lt;strong&gt;The Web We Weave&lt;/strong&gt; is a monthly digest from the Plaid web team — rounding up what shipped, what was learned, and what's coming on plaid.com. Questions or additions? Drop them in &lt;strong&gt;#website-open&lt;/strong&gt;.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const canvas = document.getElementById('waveCanvas');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const ctx = canvas.getContext('2d');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function resize() {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>canvas.width = canvas.offsetWidth * window.devicePixelRatio;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>canvas.height = canvas.offsetHeight * window.devicePixelRatio;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.scale(window.devicePixelRatio, window.devicePixelRatio);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>let t = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function draw() {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const w = canvas.offsetWidth, h = canvas.offsetHeight;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.clearRect(0, 0, w, h);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const waves = [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ amp: 28, freq: 0.012, speed: 0.018, color: 'rgba(62,207,207,0.35)', offset: 0 },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ amp: 20, freq: 0.016, speed: 0.025, color: 'rgba(42,184,196,0.25)', offset: 1.2 },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ amp: 18, freq: 0.009, speed: 0.012, color: 'rgba(120,100,220,0.2)', offset: 2.5 },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{ amp: 14, freq: 0.02,<span class="Apple-converted-space">  </span>speed: 0.03,<span class="Apple-converted-space">  </span>color: 'rgba(62,207,180,0.15)', offset: 0.7 },</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const lineCount = 18;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>waves.forEach(wave =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for (let i = 0; i &lt; lineCount; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const yBase = (h / (lineCount - 1)) * i;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const spread = (i - lineCount / 2) / (lineCount / 2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ctx.beginPath();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ctx.strokeStyle = wave.color;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ctx.lineWidth = 0.8;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>for (let x = 0; x &lt;= w; x += 3) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const y = yBase</p>
+<p class="p1"><span class="Apple-converted-space">            </span>+ Math.sin(x * wave.freq + t * wave.speed + wave.offset + spread * 1.5) * wave.amp * (1 - Math.abs(spread) * 0.4)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>+ Math.sin(x * wave.freq * 0.5 + t * wave.speed * 0.7) * wave.amp * 0.3;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ctx.stroke();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>t++;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>requestAnimationFrame(draw);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>resize();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>window.addEventListener('resize', () =&gt; { resize(); });</p>
+<p class="p1"><span class="Apple-converted-space">  </span>draw();</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>

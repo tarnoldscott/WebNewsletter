@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Web We Weave — Issue 01</title>
+
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+
+  :root {
+
+    --navy: #0d1b2e;
+
+    --navy-mid: #122035;
+
+    --navy-card: #152338;
+
+    --navy-border: #1e3050;
+
+    --fg: #ffffff;
+
+    --mid: #8ba3be;
+
+    --dim: #4a6580;
+
+    --teal: #3ecfcf;
+
+    --teal-soft: #2ab8c4;
+
+    --rule: #1a2f48;
+
+    --tag-bg: #3ecfcf;
+
+    --tag-fg: #0d1b2e;
+
+  }
+
+
+
+  body {
+
+    background: var(--navy);
+
+    color: var(--fg);
+
+    font-family: 'Inter', sans-serif;
+
+    font-weight: 400;
+
+    line-height: 1.6;
+
+    padding: 0 1.25rem 5rem;
+
+  }
+
+
+
+  a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--dim); transition: text-decoration-color 0.15s; }
+
+  a:hover { text-decoration-color: var(--teal); color: var(--teal); }
+
+
+
+  /* ── HERO ── */
+
+  .hero {
+
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    padding: 0 0 3rem;
+
+    position: relative;
+
+    overflow: hidden;
+
+  }
+
+
+
+  .hero-canvas-wrap {
+
+    width: 100%;
+
+    height: 220px;
+
+    position: relative;
+
+    margin-bottom: -1rem;
+
+  }
+
+
+
+  #waveCanvas {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+  }
+
+
+
+  .hero-meta {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 0.62rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    color: var(--mid);
+
+    padding-top: 1.5rem;
+
+    border-top: 1px solid var(--rule);
+
+  }
+
+
+
+  .hero h1 {
+
+    font-size: clamp(2.75rem, 8vw, 5rem);
+
+    font-weight: 700;
+
+    line-height: 1.0;
+
+    letter-spacing: -0.03em;
+
+    margin: 1.25rem 0 0.75rem;
+
+  }
+
+  .hero h1 .accent { color: var(--teal); font-weight: 700; }
+
+
+
+  .hero-sub {
+
+    font-size: 0.65rem;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    color: var(--mid);
+
+  }
+
+
+
+  /* ── WELCOME ── */
+
+  .welcome {
+
+    max-width: 760px;
+
+    margin: 0 auto 0;
+
+    background: rgba(255,255,255,0.04);
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 16px;
+
+    padding: 1.25rem 1.75rem;
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 1.5rem;
+
+  }
+
+  .welcome-label {
+
+    font-size: 0.6rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    color: var(--mid);
+
+    white-space: nowrap;
+
+    flex-shrink: 0;
+
+    padding-top: 0.1rem;
+
+  }
+
+  .welcome-body { flex: 1; }
+
+  .welcome p {
+
+    font-size: 0.82rem;
+
+    line-height: 1.65;
+
+    color: var(--mid);
+
+    display: inline;
+
+  }
+
+  .welcome p + p::before { content: ' '; }
+
+  .welcome-sig {
+
+    display: inline;
+
+    font-size: 0.82rem;
+
+    color: var(--dim);
+
+    font-weight: 500;
+
+  }
+
+
+
+  /* ── ISSUE BANNER ── */
+
+  .issue-banner {
+
+    max-width: 760px;
+
+    margin: 1.5rem auto 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1.25rem;
+
+    padding: 1rem 1.5rem;
+
+    background: var(--navy-card);
+
+    border: 1px solid var(--navy-border);
+
+    border-radius: 12px;
+
+  }
+
+  .issue-banner-label {
+
+    font-size: 0.62rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    color: var(--mid);
+
+    flex-shrink: 0;
+
+  }
+
+  .issue-banner-rule { flex: 1; height: 1px; background: var(--rule); }
+
+  .issue-banner-title {
+
+    font-size: 0.8rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+
+    color: var(--teal);
+
+    flex-shrink: 0;
+
+  }
+
+
+
+  /* ── CONTAINER ── */
+
+  .container { max-width: 760px; margin: 0 auto; }
+
+  section { padding: 3rem 0; border-bottom: 1px solid var(--rule); }
+
+  section:last-of-type { border-bottom: none; }
+
+
+
+  /* ── SECTION HEADER ── */
+
+  .section-header {
+
+    display: flex;
+
+    align-items: baseline;
+
+    justify-content: space-between;
+
+    margin-bottom: 2rem;
+
+    gap: 1rem;
+
+  }
+
+  .section-title {
+
+    font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+
+    font-weight: 700;
+
+    letter-spacing: -0.025em;
+
+    line-height: 1.05;
+
+  }
+
+  .section-title .accent { color: var(--teal); }
+
+  .section-label {
+
+    font-size: 0.62rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    color: var(--mid);
+
+    white-space: nowrap;
+
+  }
+
+
+
+  /* ── STAT BAR ── */
+
+  .stat-bar {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+
+    gap: 1px;
+
+    background: var(--rule);
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--rule);
+
+  }
+
+  .stat {
+
+    background: rgba(255,255,255,0.03);
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+    padding: 1.5rem 1.5rem;
+
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+
+  }
+
+  .stat:first-child { border-radius: 13px 0 0 13px; }
+
+  .stat:last-child { border-radius: 0 13px 13px 0; }
+
+  .stat-number {
+
+    font-size: 2.75rem;
+
+    font-weight: 700;
+
+    letter-spacing: -0.04em;
+
+    line-height: 1;
+
+    color: var(--teal);
+
+  }
+
+  .stat-label {
+
+    font-size: 0.68rem;
+
+    color: var(--mid);
+
+    margin-top: 0.4rem;
+
+    line-height: 1.4;
+
+  }
+
+
+
+  /* ── SHIP GROUPS ── */
+
+  .ship-group {
+
+    background: var(--navy-card);
+
+    border: 1px solid var(--navy-border);
+
+    border-radius: 14px;
+
+    padding: 0 1.25rem;
+
+    margin-bottom: 1rem;
+
+  }
+
+  .ship-group:last-child { margin-bottom: 0; }
+
+  .ship-group-title {
+
+    font-size: 0.62rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    color: var(--teal);
+
+    padding: 1rem 0 0.75rem;
+
+    border-bottom: 1px solid var(--rule);
+
+  }
+
+  .ship {
+
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    gap: 0.2rem 1rem;
+
+    align-items: start;
+
+    padding: 1rem 0;
+
+    border-bottom: 1px solid var(--rule);
+
+  }
+
+  .ship:last-child { border-bottom: none; }
+
+  .ship-name { font-size: 0.95rem; font-weight: 600; line-height: 1.3; }
+
+  .ship-name a { text-decoration: none; }
+
+  .ship-name a:hover { color: var(--teal); }
+
+  .ship-desc { font-size: 0.82rem; color: var(--mid); margin-top: 0.2rem; grid-column: 1; line-height: 1.55; }
+
+  .ship-link {
+
+    font-size: 0.6rem; font-weight: 600;
+
+    letter-spacing: 0.12em; text-transform: uppercase;
+
+    color: var(--dim); text-decoration: none;
+
+    white-space: nowrap; padding-top: 0.2rem;
+
+    transition: color 0.15s;
+
+  }
+
+  .ship-link:hover { color: var(--teal); }
+
+  .ship-preview {
+    grid-column: 1 / -1;
+    margin-top: 0.6rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--navy-border);
+  }
+  .ship-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+
+  /* ── LEARNINGS ── */
+
+  .learning {
+
+    padding: 1.25rem 0;
+
+    border-bottom: 1px solid var(--rule);
+
+    display: grid;
+
+    grid-template-columns: 1.75rem 1fr;
+
+    gap: 0 0.75rem;
+
+  }
+
+  .learning:last-child { border-bottom: none; }
+
+  .learning-icon { font-size: 0.95rem; padding-top: 0.1rem; }
+
+  .learning-text strong { font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 0.3rem; }
+
+  .learning-text p { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
+
+
+
+  /* ── NEXT ── */
+
+  .next-item {
+
+    display: flex; justify-content: space-between;
+
+    align-items: center; padding: 1rem 0;
+
+    border-bottom: 1px solid var(--rule); gap: 1rem;
+
+  }
+
+  .next-item:last-child { border-bottom: none; }
+
+  .next-name { font-size: 0.9rem; font-weight: 600; }
+
+  .next-desc { font-size: 0.8rem; color: var(--mid); margin-top: 0.2rem; }
+
+  .tag {
+
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+
+    text-transform: uppercase; background: var(--tag-bg);
+
+    color: var(--tag-fg); padding: 0.3rem 0.7rem;
+
+    border-radius: 999px; white-space: nowrap; flex-shrink: 0;
+
+  }
+
+  .tag.soon {
+
+    background: transparent; color: var(--mid);
+
+    border: 1px solid var(--dim);
+
+  }
+
+
+
+  /* ── SHOUTOUTS ── */
+
+  .shoutout {
+
+    padding: 1.5rem 1.5rem;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 14px;
+
+    margin-bottom: 0.75rem;
+
+    background: rgba(255,255,255,0.04);
+
+    backdrop-filter: blur(16px);
+
+    -webkit-backdrop-filter: blur(16px);
+
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+
+  }
+
+  .shoutout:last-child { margin-bottom: 0; }
+
+  .shoutout-award {
+
+    font-size: 0.6rem; font-weight: 600;
+
+    letter-spacing: 0.14em; text-transform: uppercase;
+
+    color: var(--mid); margin-bottom: 0.5rem;
+
+  }
+
+  .shoutout-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+
+  .shoutout-body { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
+
+
+
+  /* ── FOOTER ── */
+
+  .footer {
+
+    padding: 2.5rem 0 0;
+
+    font-size: 0.72rem;
+
+    color: var(--mid);
+
+    line-height: 1.7;
+
+    border-top: 1px solid var(--rule);
+
+  }
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<!-- HERO -->
+
+<div class="hero">
+
+  <div class="hero-canvas-wrap">
+
+    <canvas id="waveCanvas"></canvas>
+
+  </div>
+
+  <div class="hero-meta">
+
+    <span>The Web We Weave</span>
+
+    <span>Issue 01 &nbsp;·&nbsp; Jan–Feb 2026</span>
+
+  </div>
+
+  <h1>The web we <span class="accent">weave</span></h1>
+
+  <div class="hero-sub">A monthly digest from the Plaid web team</div>
+
+</div>
+
+
+
+<!-- WELCOME -->
+
+<div class="welcome">
+
+  <div class="welcome-label">Note</div>
+
+  <div class="welcome-body">
+
+    <p>Welcome to The Web We Weave, a monthly window into what's happening on plaid.com. Web moves fast and a lot of it happens quietly. This first issue covers January and February — a lot shipped (aka the web team threw down). Serious, zero shame about the double debut.</p>
+
+    <span class="welcome-sig"> — The web team 🕸️</span>
+
+  </div>
+
+</div>
+
+
+
+<!-- ISSUE BANNER -->
+
+<div class="issue-banner">
+
+  <div class="issue-banner-label">Issue 01</div>
+
+  <div class="issue-banner-rule"></div>
+
+  <div class="issue-banner-title">January &amp; February 2026</div>
+
+</div>
+
+
+
+<div class="container">
+
+
+
+  <!-- BY THE NUMBERS -->
+
+  <section>
+
+    <div class="section-header">
+
+      <div class="section-title">By the <span class="accent">numbers</span></div>
+
+      <div class="section-label">Jan–Feb 2026</div>
+
+    </div>
+
+    <div class="stat-bar">
+
+      <div class="stat">
+
+        <div class="stat-number">12+</div>
+
+        <div class="stat-label">Customer-facing surfaces shipped</div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-number">7</div>
+
+        <div class="stat-label">Net-new or fully revamped use case pages</div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-number">2</div>
+
+        <div class="stat-label">New industry pillars</div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-number">3</div>
+
+        <div class="stat-label">Nav variants live in experiment</div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- WHAT SHIPPED -->
+
+  <section>
+
+    <div class="section-header">
+
+      <div class="section-title">What <span class="accent">shipped</span></div>
+
+      <div class="section-label">12+ surfaces</div>
+
+    </div>
+
+
+
+    <div class="ship-group">
+
+      <div class="ship-group-title">Payments</div>
+
+      <div class="ship">
+
+        <div>
+
+          <div class="ship-name"><a href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank">Outbound Bank Payments</a></div>
+
+          <div class="ship-desc">A revamped story for getting money out the door: auto rail selection, instant account verification, and fraud signals that keep payouts moving.</div>
+
+        </div>
+
+        <a class="ship-link" href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank">View →</a>
+
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/5EijeT5ag6FvNpNTXkI0Pd/67817c08ce59a71e64dda756c01dee8f/module-OpenGraph.png" alt="Outbound Bank Payments"></a></div>
+
+      </div>
+
+      <div class="ship">
+
+        <div>
+
+          <div class="ship-name"><a href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank">Inbound Bank Payments</a></div>
+
+          <div class="ship-desc">The other side of the flow. Higher-converting bank checkout, fewer failures, and real-time balance checks that make pay-by-bank predictable.</div>
+
+        </div>
+
+        <a class="ship-link" href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank">View →</a>
+
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/3EdPPcpLGDWu1RTdJPXdpL/c806a4e297b9823fd1eeb072d2571a0b/module-OpenGraph.png" alt="Inbound Bank Payments"></a></div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="ship-group">
+
+      <div class="ship-group-title">Financial Management</div>
+
+      <div class="ship">
+
+        <div>
+
+          <div class="ship-name"><a href="https://plaid.com/use-cases/earned-wage-access/" target="_blank">Earned Wage Access (EWA)</a></div>
+
+          <div class="ship-desc">How Plaid helps EWA providers qualify more users, assess repayment risk from real cash-flow data, and reduce losses with better timing.</div>
+
+        </div>
+
+        <a class="ship-link" href="https://plaid.com/use-cases/earned-wage-access/" target="_blank">View →</a>
+
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/earned-wage-access/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2nQJlVfT5vlYOtNk5OnSmt/a6f20b04eb6f106442f03c932929dda4/module-OpenGraph.png" alt="Earned Wage Access"></a></div>
+
+      </div>
+
+      <div class="ship">
+
+        <div>
+
+          <div class="ship-name"><a href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank">Personal Financial Management (PFM)</a></div>
+
+          <div class="ship-desc">The "how top personal finance apps are built" page — clean enriched data, real-time transaction sync, AI-enhanced categorization.</div>
+
+        </div>
+
+        <a class="ship-link" href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank">View →</a>
+
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/5R9JAgib53spB5OFvjqUN4/db60cc464900e4d95bbfa216a09e455e/module-OpenGraph.png" alt="Personal Financial Management"></a></div>
+
+      </div>
+
+      <div class="ship">
+
+        <div>
+
+          <div class="ship-name"><a href="https://plaid.com/use-cases/business-financial-management/" target="_blank">Business Financial Management (BFM)</a></div>
+
+          <div class="ship-desc">A cash-flow and expense story for SMBs: structured business data, real-time balances, and smoother payroll and invoice flows.</div>
+
+        </div>
+
+        <a class="ship-link" href="https://plaid.com/use-cases/business-financial-management/" target="_blank">View →</a>
+
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/business-financial-management/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4pjB7SBpTmT4xQqTW2NAXw/0f566cb5955ae374b0a0be061e753c61/module-OpenGraph.png" alt="Business Financial Management"></a></div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="ship-group">
+
+      <div class="ship-group-title">Industries</div>
+
+      <div class="ship">
+
+        <div>
+
+          <div class="ship-name"><a href="https://plaid.com/industries/insurance/" target="_blank">Insurance</a></div>
+
+          <div class="ship-desc">A full-funnel industry pillar covering fraud, premium collection, payouts, and underwriting — from quote to claim.</div>
+
+        </div>
+
+        <a class="ship-link" href="https://plaid.com/industries/insurance/" target="_blank">View →</a>
+
+        <div class="ship-preview"><a href="https://plaid.com/industries/insurance/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2ilm46Q8C42ruEQ6ew21hb/53df6c85c42ad026579acda3a1b5d109/module-OpenGraph.png" alt="Insurance"></a></div>
+
+      </div>
+
+      <div class="ship">
+
+        <div>
+
+          <div class="ship-name"><a href="https://plaid.com/industries/ai/" target="_blank">AI Companies</a></div>
+
+          <div class="ship-desc">The first page built for AI-first builders: real financial context for agents, identity and access controls, pay-by-bank rails for agentic commerce.</div>
+
+        </div>
+
+        <a class="ship-link" href="https://plaid.com/industries/ai/" target="_blank">View →</a>
+
+        <div class="ship-preview"><a href="https://plaid.com/industries/ai/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4O83rGJ6fc22aV9oTwyrhk/528a5d388ee0cc9d7c7ffd5396478116/module-OpenGraph.png" alt="AI Companies"></a></div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="ship-group">
+
+      <div class="ship-group-title">AI &amp; Intelligent Finance</div>
+
+      <div class="ship">
+
+        <div>
+
+          <div class="ship-name"><a href="https://plaid.com/intelligent-finance/" target="_blank">Intelligent Finance Hub</a></div>
+
+          <div class="ship-desc">Plaid's first full-stack public AI story. Defines intelligent finance, introduces <a href="https://plaid.com/intelligent-finance/">Plaid Intelligence</a>, and positions Plaid at the infrastructure layer — not as another AI app.</div>
+
+        </div>
+
+        <a class="ship-link" href="https://plaid.com/intelligent-finance/" target="_blank">View →</a>
+
+        <div class="ship-preview"><a href="https://plaid.com/intelligent-finance/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4PolpLzZBZHi8zpvuy0fdo/9fe12de4836b2e59b95195576f42bb46/module-OpenGraph.png" alt="Intelligent Finance Hub"></a></div>
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <div class="ship-group">
+
+      <div class="ship-group-title">Everything else</div>
+
+      <div class="ship">
+
+        <div>
+
+          <div class="ship-name"><a href="https://plaid.com/products/" target="_blank">All Products Page</a></div>
+
+          <div class="ship-desc">A new front door into everything Plaid sells — launched alongside the nav experiment to replace the scattered product-page experience. <em style="color:var(--teal);font-style:normal;">Note: already being reworked for a March relaunch.</em></div>
+
+        </div>
+
+        <a class="ship-link" href="https://plaid.com/products/" target="_blank">View →</a>
+
+        <div class="ship-preview"><a href="https://plaid.com/products/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2KmTE57CklaON0uT7mG8CW/1f7476f39291b2eb22d2ee8f9ba29d20/module-OpenGraph.png" alt="All Products Page"></a></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- LEARNINGS -->
+
+  <section>
+
+    <div class="section-header">
+
+      <div class="section-title">Learnings &amp; <span class="accent">experiments</span></div>
+
+      <div class="section-label">4 takeaways</div>
+
+    </div>
+
+    <div class="learning">
+
+      <div class="learning-icon">📐</div>
+
+      <div class="learning-text">
+
+        <strong>Shorter pages convert better for paid traffic</strong>
+
+        <p>An experiment sent 50% of paid traffic to a shortened <a href="https://plaid.com/products/auth/">Auth product page</a> and produced a statistically significant conversion lift — enough to make it the default for that segment. The CTA-first, cut-the-fat approach works when the audience already has intent.</p>
+
+      </div>
+
+    </div>
+
+    <div class="learning">
+
+      <div class="learning-icon">🧭</div>
+
+      <div class="learning-text">
+
+        <strong>The right IA is still an open question — so it's being tested</strong>
+
+        <p>A site-wide nav experiment is live with three variants across desktop and mobile, split via LaunchDarkly with results flowing into Databricks. The core question: how should plaid.com be structured to tell a product + solution + industry story without losing people? Real data incoming.</p>
+
+      </div>
+
+    </div>
+
+    <div class="learning">
+
+      <div class="learning-icon">🗺️</div>
+
+      <div class="learning-text">
+
+        <strong>Use case pages are now reusable patterns, not one-offs</strong>
+
+        <p>Payments and Financial Management established a repeatable structure: context → value → how it works → proof. Written for the practitioner, not the API. A solid reference for the next wave of use case pages.</p>
+
+      </div>
+
+    </div>
+
+    <div class="learning">
+
+      <div class="learning-icon">🤖</div>
+
+      <div class="learning-text">
+
+        <strong>AI copy needs scaffolding, not buzzwords</strong>
+
+        <p>The <a href="https://plaid.com/intelligent-finance/">Intelligent Finance launch</a> set a tone for AI writing at Plaid: more explanation, clearer hierarchy, less "AI-powered everything." Anchoring to the infrastructure layer — data + models + trust — gave the copy something concrete to stand on.</p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- SHOUTOUTS -->
+
+  <section>
+
+    <div class="section-header">
+
+      <div class="section-title">Shout<span class="accent">outs</span> 👏</div>
+
+      <div class="section-label">Well deserved</div>
+
+    </div>
+
+    <div class="shoutout">
+
+      <div class="shoutout-award">🏆 Ship of the bimonth</div>
+
+      <div class="shoutout-title">Plaid's AI story, live on the site</div>
+
+      <div class="shoutout-body">Between the <a href="https://plaid.com/intelligent-finance/">Intelligent Finance hub</a> and the new <a href="https://plaid.com/industries/ai/">AI Companies industry page</a>, this was the month Plaid's AI narrative finally had a home on the web. Two pages, one cohesive point of view: Plaid as the financial infrastructure layer that makes AI in finance actually work.</div>
+
+    </div>
+
+    <div class="shoutout">
+
+      <div class="shoutout-award">🔁 Pattern of the bimonth</div>
+
+      <div class="shoutout-title">Use case + industry web system</div>
+
+      <div class="shoutout-body">Seven pages. Two industry pillars. One repeatable structure that didn't exist six months ago. Use case storytelling finally lives on the site, not just in decks. See it: <a href="https://plaid.com/use-cases/inbound-bank-payments/">Inbound</a>, <a href="https://plaid.com/use-cases/outbound-bank-payments/">Outbound</a>, <a href="https://plaid.com/use-cases/earned-wage-access/">EWA</a>, <a href="https://plaid.com/use-cases/personal-financial-insights/">PFM</a>, <a href="https://plaid.com/use-cases/business-financial-management/">BFM</a>, <a href="https://plaid.com/industries/insurance/">Insurance</a>, <a href="https://plaid.com/industries/ai/">AI companies</a>.</div>
+
+    </div>
+
+    <div class="shoutout">
+
+      <div class="shoutout-award">🧪 Experiment of the bimonth</div>
+
+      <div class="shoutout-title">Nav + Auth tests</div>
+
+      <div class="shoutout-body">For actually using experiments to answer real design questions instead of just shipping and hoping. The <a href="https://plaid.com/products/auth/">Auth short-form</a> result alone was worth it.</div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- FOOTER -->
+
+  <div class="footer">
+
+    <p><strong>The Web We Weave</strong> is a monthly digest from the Plaid web team — rounding up what shipped, what was learned, and what's coming on plaid.com. Questions or additions? Drop them in <strong>#website-open</strong>.</p>
+
+  </div>
+
+
+
+</div>
+
+
+
+<script>
+
+  const canvas = document.getElementById('waveCanvas');
+
+  const ctx = canvas.getContext('2d');
+
+
+
+  function resize() {
+
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+
+    canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+  }
+
+
+
+  let t = 0;
+
+
+
+  function draw() {
+
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+
+    ctx.clearRect(0, 0, w, h);
+
+
+
+    const waves = [
+
+      { amp: 28, freq: 0.012, speed: 0.018, color: 'rgba(62,207,207,0.35)', offset: 0 },
+
+      { amp: 20, freq: 0.016, speed: 0.025, color: 'rgba(42,184,196,0.25)', offset: 1.2 },
+
+      { amp: 18, freq: 0.009, speed: 0.012, color: 'rgba(120,100,220,0.2)', offset: 2.5 },
+
+      { amp: 14, freq: 0.02,  speed: 0.03,  color: 'rgba(62,207,180,0.15)', offset: 0.7 },
+
+    ];
+
+
+
+    const lineCount = 18;
+
+
+
+    waves.forEach(wave => {
+
+      for (let i = 0; i < lineCount; i++) {
+
+        const yBase = (h / (lineCount - 1)) * i;
+
+        const spread = (i - lineCount / 2) / (lineCount / 2);
+
+        ctx.beginPath();
+
+        ctx.strokeStyle = wave.color;
+
+        ctx.lineWidth = 0.8;
+
+        for (let x = 0; x <= w; x += 3) {
+
+          const y = yBase
+
+            + Math.sin(x * wave.freq + t * wave.speed + wave.offset + spread * 1.5) * wave.amp * (1 - Math.abs(spread) * 0.4)
+
+            + Math.sin(x * wave.freq * 0.5 + t * wave.speed * 0.7) * wave.amp * 0.3;
+
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+
+        }
+
+        ctx.stroke();
+
+      }
+
+    });
+
+
+
+    t++;
+
+    requestAnimationFrame(draw);
+
+  }
+
+
+
+  resize();
+
+  window.addEventListener('resize', () => { resize(); });
+
+  draw();
+
+</script>
+
+</body>
+
+</html>
