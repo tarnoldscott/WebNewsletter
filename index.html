@@ -269,9 +269,9 @@
   }
   .ship {
     display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 0.2rem 1rem;
-    align-items: start;
+    grid-template-columns: 100px 1fr auto;
+    gap: 0.2rem 1.25rem;
+    align-items: center;
     padding: 1rem 0;
     border-bottom: 1px solid var(--rule);
   }
@@ -279,7 +279,7 @@
   .ship-name { font-size: 0.95rem; font-weight: 600; line-height: 1.3; }
   .ship-name a { text-decoration: none; }
   .ship-name a:hover { color: var(--teal); }
-  .ship-desc { font-size: 0.82rem; color: var(--mid); margin-top: 0.2rem; grid-column: 1; line-height: 1.55; }
+  .ship-desc { font-size: 0.82rem; color: var(--mid); margin-top: 0.2rem; line-height: 1.55; }
   .ship-link {
     font-size: 0.6rem; font-weight: 700;
     letter-spacing: 0.1em; text-transform: uppercase;
@@ -289,14 +289,14 @@
     padding: 0.4rem 0.85rem;
     border-radius: 999px;
     transition: background 0.15s, transform 0.15s;
-    align-self: start;
-    margin-top: 0.15rem;
+    align-self: center;
+    margin-left: 0.5rem;
   }
   .ship-link:hover { background: var(--teal-soft); color: var(--tag-fg); transform: translateY(-1px); }
   .ship-preview {
-    grid-row: 1 / 3;
-    grid-column: 3;
-    width: 120px;
+    grid-row: 1;
+    grid-column: 1;
+    width: 100px;
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--navy-border);
@@ -471,9 +471,9 @@
 
 <!-- STICKY TOC -->
 <nav class="toc" id="toc">
-  <a href="#numbers">By the Numbers</a>
-  <a href="#shipped">What Shipped</a>
-  <a href="#hood">Under the Hood</a>
+  <a href="#numbers">By the numbers</a>
+  <a href="#shipped">What shipped</a>
+  <a href="#hood">Under the hood</a>
   <a href="#learnings">Learnings</a>
   <a href="#shoutouts">Shoutouts</a>
 </nav>
@@ -493,7 +493,7 @@
 
 <!-- WELCOME -->
 <div class="welcome">
-  <div class="welcome-label">Note</div>
+  <div class="welcome-label">📣</div>
   <div class="welcome-body">
     <p>Welcome to The Web We Weave, a monthly window into what's happening on plaid.com. Web moves fast and a lot of it happens quietly. This first issue covers January and February — a lot shipped (aka the web team threw down). Serious, zero shame about the double debut.</p>
   </div>
@@ -553,80 +553,80 @@
     <div class="ship-group">
       <div class="ship-group-title">Payments</div>
       <div class="ship">
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/5EijeT5ag6FvNpNTXkI0Pd/67817c08ce59a71e64dda756c01dee8f/module-OpenGraph.png" alt="Outbound Bank Payments"></a></div>
         <div>
           <div class="ship-name"><a href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank">Outbound Bank Payments</a></div>
           <div class="ship-desc">A revamped story for getting money out the door: auto rail selection, instant account verification, and fraud signals that keep payouts moving.</div>
         </div>
         <a class="ship-link" href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank">View →</a>
-        <div class="ship-preview"><a href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/5EijeT5ag6FvNpNTXkI0Pd/67817c08ce59a71e64dda756c01dee8f/module-OpenGraph.png" alt="Outbound Bank Payments"></a></div>
       </div>
       <div class="ship">
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/3EdPPcpLGDWu1RTdJPXdpL/c806a4e297b9823fd1eeb072d2571a0b/module-OpenGraph.png" alt="Inbound Bank Payments"></a></div>
         <div>
           <div class="ship-name"><a href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank">Inbound Bank Payments</a></div>
           <div class="ship-desc">The other side of the flow. Higher-converting bank checkout, fewer failures, and real-time balance checks that make pay-by-bank predictable.</div>
         </div>
         <a class="ship-link" href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank">View →</a>
-        <div class="ship-preview"><a href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/3EdPPcpLGDWu1RTdJPXdpL/c806a4e297b9823fd1eeb072d2571a0b/module-OpenGraph.png" alt="Inbound Bank Payments"></a></div>
       </div>
     </div>
 
     <div class="ship-group">
       <div class="ship-group-title">Financial Management</div>
       <div class="ship">
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/earned-wage-access/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2nQJlVfT5vlYOtNk5OnSmt/a6f20b04eb6f106442f03c932929dda4/module-OpenGraph.png" alt="Earned Wage Access"></a></div>
         <div>
           <div class="ship-name"><a href="https://plaid.com/use-cases/earned-wage-access/" target="_blank">Earned Wage Access (EWA)</a></div>
           <div class="ship-desc">How Plaid helps EWA providers qualify more users, assess repayment risk from real cash-flow data, and reduce losses with better timing.</div>
         </div>
         <a class="ship-link" href="https://plaid.com/use-cases/earned-wage-access/" target="_blank">View →</a>
-        <div class="ship-preview"><a href="https://plaid.com/use-cases/earned-wage-access/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2nQJlVfT5vlYOtNk5OnSmt/a6f20b04eb6f106442f03c932929dda4/module-OpenGraph.png" alt="Earned Wage Access"></a></div>
       </div>
       <div class="ship">
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/5R9JAgib53spB5OFvjqUN4/db60cc464900e4d95bbfa216a09e455e/module-OpenGraph.png" alt="Personal Financial Management"></a></div>
         <div>
           <div class="ship-name"><a href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank">Personal Financial Management (PFM)</a></div>
           <div class="ship-desc">The "how top personal finance apps are built" page — clean enriched data, real-time transaction sync, AI-enhanced categorization.</div>
         </div>
         <a class="ship-link" href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank">View →</a>
-        <div class="ship-preview"><a href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/5R9JAgib53spB5OFvjqUN4/db60cc464900e4d95bbfa216a09e455e/module-OpenGraph.png" alt="Personal Financial Management"></a></div>
       </div>
       <div class="ship">
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/business-financial-management/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4pjB7SBpTmT4xQqTW2NAXw/0f566cb5955ae374b0a0be061e753c61/module-OpenGraph.png" alt="Business Financial Management"></a></div>
         <div>
           <div class="ship-name"><a href="https://plaid.com/use-cases/business-financial-management/" target="_blank">Business Financial Management (BFM)</a></div>
           <div class="ship-desc">A cash-flow and expense story for SMBs: structured business data, real-time balances, and smoother payroll and invoice flows.</div>
         </div>
         <a class="ship-link" href="https://plaid.com/use-cases/business-financial-management/" target="_blank">View →</a>
-        <div class="ship-preview"><a href="https://plaid.com/use-cases/business-financial-management/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4pjB7SBpTmT4xQqTW2NAXw/0f566cb5955ae374b0a0be061e753c61/module-OpenGraph.png" alt="Business Financial Management"></a></div>
       </div>
     </div>
 
     <div class="ship-group">
       <div class="ship-group-title">Industries</div>
       <div class="ship">
+        <div class="ship-preview"><a href="https://plaid.com/industries/insurance/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2ilm46Q8C42ruEQ6ew21hb/53df6c85c42ad026579acda3a1b5d109/module-OpenGraph.png" alt="Insurance"></a></div>
         <div>
           <div class="ship-name"><a href="https://plaid.com/industries/insurance/" target="_blank">Insurance</a></div>
           <div class="ship-desc">A full-funnel industry pillar covering fraud, premium collection, payouts, and underwriting — from quote to claim.</div>
         </div>
         <a class="ship-link" href="https://plaid.com/industries/insurance/" target="_blank">View →</a>
-        <div class="ship-preview"><a href="https://plaid.com/industries/insurance/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2ilm46Q8C42ruEQ6ew21hb/53df6c85c42ad026579acda3a1b5d109/module-OpenGraph.png" alt="Insurance"></a></div>
       </div>
       <div class="ship">
+        <div class="ship-preview"><a href="https://plaid.com/industries/ai/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4O83rGJ6fc22aV9oTwyrhk/528a5d388ee0cc9d7c7ffd5396478116/module-OpenGraph.png" alt="AI Companies"></a></div>
         <div>
           <div class="ship-name"><a href="https://plaid.com/industries/ai/" target="_blank">AI Companies</a></div>
           <div class="ship-desc">The first page built for AI-first builders: real financial context for agents, identity and access controls, pay-by-bank rails for agentic commerce.</div>
         </div>
         <a class="ship-link" href="https://plaid.com/industries/ai/" target="_blank">View →</a>
-        <div class="ship-preview"><a href="https://plaid.com/industries/ai/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4O83rGJ6fc22aV9oTwyrhk/528a5d388ee0cc9d7c7ffd5396478116/module-OpenGraph.png" alt="AI Companies"></a></div>
       </div>
     </div>
 
     <div class="ship-group">
       <div class="ship-group-title">AI &amp; Intelligent Finance</div>
       <div class="ship">
+        <div class="ship-preview"><a href="https://plaid.com/intelligent-finance/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4PolpLzZBZHi8zpvuy0fdo/9fe12de4836b2e59b95195576f42bb46/module-OpenGraph.png" alt="Intelligent Finance Hub"></a></div>
         <div>
           <div class="ship-name"><a href="https://plaid.com/intelligent-finance/" target="_blank">Intelligent Finance Hub</a></div>
           <div class="ship-desc">Plaid's first full-stack public AI story. Defines intelligent finance, introduces <a href="https://plaid.com/intelligent-finance/">Plaid Intelligence</a>, and positions Plaid at the infrastructure layer — not as another AI app.</div>
         </div>
         <a class="ship-link" href="https://plaid.com/intelligent-finance/" target="_blank">View →</a>
-        <div class="ship-preview"><a href="https://plaid.com/intelligent-finance/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4PolpLzZBZHi8zpvuy0fdo/9fe12de4836b2e59b95195576f42bb46/module-OpenGraph.png" alt="Intelligent Finance Hub"></a></div>
       </div>
 
     </div>
@@ -634,12 +634,12 @@
     <div class="ship-group">
       <div class="ship-group-title">Everything else</div>
       <div class="ship">
+        <div class="ship-preview"><a href="https://plaid.com/products/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2KmTE57CklaON0uT7mG8CW/1f7476f39291b2eb22d2ee8f9ba29d20/module-OpenGraph.png" alt="All Products Page"></a></div>
         <div>
           <div class="ship-name"><a href="https://plaid.com/products/" target="_blank">All Products Page</a></div>
           <div class="ship-desc">A new front door into everything Plaid sells — launched alongside the nav experiment to replace the scattered product-page experience. <em style="color:var(--teal);font-style:normal;">Note: already being reworked for a March relaunch.</em></div>
         </div>
         <a class="ship-link" href="https://plaid.com/products/" target="_blank">View →</a>
-        <div class="ship-preview"><a href="https://plaid.com/products/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2KmTE57CklaON0uT7mG8CW/1f7476f39291b2eb22d2ee8f9ba29d20/module-OpenGraph.png" alt="All Products Page"></a></div>
       </div>
     </div>
   </section>
@@ -648,6 +648,7 @@
   <section id="hood">
     <div class="section-header">
       <div class="section-title">Under the <span class="accent">hood</span></div>
+
       <div class="section-label">Platform & eng</div>
     </div>
 
@@ -655,7 +656,7 @@
       <div class="learning-icon">⚛️</div>
       <div class="learning-text">
         <strong>React 18 + Next.js 14 finally landed</strong>
-        <p>Two major dependency upgrades shipped in January — React 17 → 18 and Next.js 12 → 14 — with significant help from AI tooling. The immediate payoff: Sentry errors dropped ~88% week over week. A long time coming and a meaningful unlock for what comes next.</p>
+        <p>Two upgrades that were a long time coming — and a meaningful unlock for everything we want to build next. Sentry errors dropped ~88% week over week when they landed. AI tooling made it possible to ship them faster than expected.</p>
       </div>
     </div>
 
@@ -663,7 +664,7 @@
       <div class="learning-icon">🔥</div>
       <div class="learning-text">
         <strong>Firewall tuning cut compute by ~98%</strong>
-        <p>Request middleware on plaid.com was updated to selectively process page requests rather than static assets — reducing compute by roughly 98% on an average page load. New rules were also added to challenge and block traffic on a client-by-client basis, with updated alerting to reduce on-call fatigue.</p>
+        <p>A quiet but massive win: request middleware updates cut compute by ~98% on an average page load. Also added smarter traffic rules and reduced on-call alerts. The kind of thing nobody notices when it works — which is the point.</p>
       </div>
     </div>
 
@@ -671,7 +672,7 @@
       <div class="learning-icon">🔗</div>
       <div class="learning-text">
         <strong>4,100 internal links being cleaned up</strong>
-        <p>A site-wide audit surfaced ~4,100 internal links resolving as redirects or errors. Remediation is underway to improve crawl efficiency and SEO health. The kind of unglamorous work that compounds over time.</p>
+        <p>~4,100 internal links were resolving as redirects or errors. Remediation is underway. Unglamorous? Yes. Does it compound over time? Absolutely.</p>
       </div>
     </div>
 
@@ -679,7 +680,7 @@
       <div class="learning-icon">🛠️</div>
       <div class="learning-text">
         <strong>CMS runbook is now a slash command</strong>
-        <p>The CMS component checklist was converted into an invokable Cursor command — reducing manual errors and shortening component build cycles. Small lift, real impact.</p>
+        <p>The CMS component checklist is now invokable as a slash command in Cursor. Fewer manual errors, faster build cycles. Small lift, real impact.</p>
       </div>
     </div>
 
@@ -724,8 +725,8 @@
   <!-- SHOUTOUTS -->
   <section id="shoutouts">
     <div class="section-header">
-      <div class="section-title">Shout<span class="accent">outs</span> 👏</div>
-      <div class="section-label">Well deserved</div>
+      <div class="section-title">Shout<span class="accent">outs</span></div>
+      <div class="section-label">Well deserved 👏</div>
     </div>
     <div class="shoutout">
       <div class="shoutout-award">🏆 Ship of the bimonth</div>
