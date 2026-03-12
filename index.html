@@ -17,10 +17,10 @@
     --fg: #ffffff;
     --mid: #8ba3be;
     --dim: #4a6580;
-    --teal: #3ecfcf;
-    --teal-soft: #2ab8c4;
+    --teal: #42F0CD;
+    --teal-soft: #10D1B7;
     --rule: #1a2f48;
-    --tag-bg: #3ecfcf;
+    --tag-bg: #42F0CD;
     --tag-fg: #0d1b2e;
   }
 
@@ -35,6 +35,36 @@
 
   a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--dim); transition: text-decoration-color 0.15s; }
   a:hover { text-decoration-color: var(--teal); color: var(--teal); }
+
+  /* ── HOLO STRIP ── */
+  .holo-strip {
+    display: block;
+    width: 100%;
+    height: 4px;
+    border: none;
+    border-radius: 2px;
+    background: linear-gradient(
+      90deg,
+      #A3A3FF 0%,
+      #0DADF2 12%,
+      #42F0CD 24%,
+      #F8DE51 34%,
+      #E574FB 46%,
+      #F9D0FF 56%,
+      #51D2FB 66%,
+      #42F0CD 76%,
+      #A3A3FF 88%,
+      #E574FB 100%
+    );
+    background-size: 200% 100%;
+    animation: holo-shift 6s linear infinite;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  @keyframes holo-shift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
 
   /* ── HERO ── */
   .hero {
@@ -491,6 +521,8 @@
   <div class="hero-sub">A monthly digest from the Plaid web team</div>
 </div>
 
+<div class="holo-strip" style="margin-bottom: 2rem;"></div>
+
 <!-- WELCOME -->
 <div class="welcome">
   <div class="welcome-label">📣</div>
@@ -514,6 +546,8 @@
   <p class="dont-sleep-body">In January and February alone: 12+ customer-facing surfaces shipped, a site-wide nav experiment launched, two major dependency upgrades landed, and Plaid's AI story finally had a home on the web.</p>
   <p class="dont-sleep-body">The web team threw down. Here's the receipts.</p>
 </div>
+
+<div class="holo-strip" style="margin: 2rem auto 0;"></div>
 
 <div class="container">
 
@@ -644,6 +678,8 @@
     </div>
   </section>
 
+  <div class="holo-strip" style="margin: 1.5rem 0;"></div>
+
   <!-- UNDER THE HOOD -->
   <section id="hood">
     <div class="section-header">
@@ -686,6 +722,8 @@
 
   </section>
 
+  <div class="holo-strip" style="margin: 1.5rem 0;"></div>
+
   <!-- LEARNINGS -->
   <section id="learnings">
     <div class="section-header">
@@ -722,6 +760,8 @@
     </div>
   </section>
 
+  <div class="holo-strip" style="margin: 1.5rem 0;"></div>
+
   <!-- SHOUTOUTS -->
   <section id="shoutouts">
     <div class="section-header">
@@ -752,6 +792,8 @@
       <li><a href="index.html" class="current">Issue 01 — Jan &amp; Feb 2026</a></li>
     </ul>
   </div>
+
+  <div class="holo-strip" style="margin: 1rem 0 0;"></div>
 
   <!-- FOOTER -->
   <div class="footer">
