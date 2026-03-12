@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About the Web Team — The Web We Weave</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2e;
+    --navy-mid: #122035;
+    --navy-card: #152338;
+    --navy-border: #1e3050;
+    --fg: #ffffff;
+    --mid: #8ba3be;
+    --dim: #4a6580;
+    --teal: #3ecfcf;
+    --teal-soft: #2ab8c4;
+    --rule: #1a2f48;
+    --tag-bg: #3ecfcf;
+    --tag-fg: #0d1b2e;
+  }
+
+  body {
+    background: var(--navy);
+    color: var(--fg);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    padding: 0 1.25rem 5rem;
+  }
+
+  a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--dim); transition: text-decoration-color 0.15s; }
+  a:hover { text-decoration-color: var(--teal); color: var(--teal); }
+
+  .top-nav {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    padding: 1rem 0 0;
+  }
+  .top-nav a {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .top-nav a:hover { color: var(--teal); }
+  .top-nav a.active { color: var(--fg); }
+
+  .container { max-width: 760px; margin: 0 auto; }
+
+  .page-header {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .page-header h1 {
+    font-size: clamp(2.25rem, 6vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 0.75rem;
+  }
+  .page-header h1 .accent { color: var(--teal); }
+  .page-header p {
+    font-size: 0.9rem;
+    color: var(--mid);
+    line-height: 1.65;
+    max-width: 580px;
+  }
+
+  .about-section {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .about-section:last-of-type { border-bottom: none; }
+
+  .about-section-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.25rem;
+  }
+
+  .about-section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .about-body {
+    font-size: 0.88rem;
+    color: var(--mid);
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+  }
+  .about-body:last-child { margin-bottom: 0; }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    margin-top: 1.25rem;
+  }
+  .pillar {
+    background: var(--navy-card);
+    padding: 1.25rem 1.25rem;
+  }
+  .pillar-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  .pillar-desc {
+    font-size: 0.78rem;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+
+  .channel-list {
+    list-style: none;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .channel-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-radius: 10px;
+  }
+  .channel-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .channel-desc {
+    font-size: 0.75rem;
+    color: var(--dim);
+  }
+
+  .footer {
+    padding: 2.5rem 0 0;
+    font-size: 0.72rem;
+    color: var(--mid);
+    line-height: 1.7;
+    border-top: 1px solid var(--rule);
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html">Issue 01</a>
+  <a href="about.html" class="active">About the Web Team</a>
+</nav>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>About the <span class="accent">web team</span></h1>
+    <p>We build, maintain, and evolve plaid.com — the front door to every product, campaign, and narrative Plaid puts into the world.</p>
+  </div>
+
+  <div class="about-section">
+    <div class="about-section-label">What we do</div>
+    <p class="about-body">The web team owns plaid.com end-to-end: strategy, design, engineering, content, experimentation, and performance. We partner across marketing, product marketing, brand, demand gen, and engineering to ship customer-facing surfaces that drive pipeline, educate buyers, and tell Plaid's story.</p>
+    <p class="about-body">We think of the website as a product — not a brochure. That means we measure it, experiment on it, and treat every page as a growth lever.</p>
+  </div>
+
+  <div class="about-section">
+    <div class="about-section-label">Our pillars</div>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-name">Growth & conversion</div>
+        <div class="pillar-desc">Experimentation, CRO, and page-level performance to turn traffic into pipeline.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-name">Storytelling</div>
+        <div class="pillar-desc">Use case, industry, and product narratives that meet buyers where they are.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-name">Platform</div>
+        <div class="pillar-desc">CMS, infrastructure, tooling, and developer experience that let us ship fast.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-name">Design systems</div>
+        <div class="pillar-desc">Reusable components and patterns that keep the site consistent and scalable.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-section-label">Stay connected</div>
+    <p class="about-body">The best way to stay in the loop or collaborate with us:</p>
+    <ul class="channel-list">
+      <li>
+        <div>
+          <div class="channel-name">#website-open</div>
+          <div class="channel-desc">General questions, requests, and updates about plaid.com</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="channel-name">The Web We Weave</div>
+          <div class="channel-desc">This newsletter — monthly updates on what shipped and what's next</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="about-section">
+    <div class="about-section-label">About this newsletter</div>
+    <p class="about-body"><strong>The Web We Weave</strong> is a monthly digest that rounds up what shipped, what was learned, and what's coming on plaid.com. It's written for anyone at Plaid who cares about the website — which should be everyone.</p>
+    <p class="about-body">Each issue covers the prior month's launches, experiments, platform work, and shoutouts. Got something to add? Drop it in <strong>#website-open</strong>.</p>
+  </div>
+
+  <div class="footer">
+    <p><strong>The Web We Weave</strong> — a monthly digest from the Plaid web team. <a href="index.html">Read the latest issue →</a></p>
+  </div>
+
+</div>
+
+</body>
+</html>

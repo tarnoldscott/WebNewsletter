@@ -281,13 +281,18 @@
   .ship-name a:hover { color: var(--teal); }
   .ship-desc { font-size: 0.82rem; color: var(--mid); margin-top: 0.2rem; grid-column: 1; line-height: 1.55; }
   .ship-link {
-    font-size: 0.6rem; font-weight: 600;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--dim); text-decoration: none;
-    white-space: nowrap; padding-top: 0.2rem;
-    transition: color 0.15s;
+    font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--tag-fg); text-decoration: none;
+    white-space: nowrap;
+    background: var(--teal);
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    transition: background 0.15s, transform 0.15s;
+    align-self: start;
+    margin-top: 0.15rem;
   }
-  .ship-link:hover { color: var(--teal); }
+  .ship-link:hover { background: var(--teal-soft); color: var(--tag-fg); transform: translateY(-1px); }
   .ship-preview {
     grid-row: 1 / 3;
     grid-column: 3;
@@ -364,9 +369,114 @@
     line-height: 1.7;
     border-top: 1px solid var(--rule);
   }
+
+  /* ── STICKY TOC ── */
+  .toc {
+    position: fixed;
+    top: 50%;
+    left: max(1rem, calc((100vw - 760px) / 2 - 160px));
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .toc a {
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dim);
+    text-decoration: none;
+    padding: 0.35rem 0.65rem;
+    border-left: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .toc a:hover, .toc a.active {
+    color: var(--teal);
+    border-left-color: var(--teal);
+  }
+  @media (max-width: 1100px) {
+    .toc { display: none; }
+  }
+
+  /* ── ISSUE ARCHIVE ── */
+  .archive {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 0 0;
+  }
+  .archive-title {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 1rem;
+  }
+  .archive-list {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .archive-list a {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--fg);
+    text-decoration: none;
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--navy-border);
+    border-radius: 999px;
+    background: var(--navy-card);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .archive-list a:hover { border-color: var(--teal); color: var(--teal); }
+  .archive-list a.current {
+    background: var(--teal);
+    color: var(--tag-fg);
+    border-color: var(--teal);
+  }
+
+  /* ── TOP NAV ── */
+  .top-nav {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    padding: 1rem 0 0;
+  }
+  .top-nav a {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .top-nav a:hover { color: var(--teal); }
+  .top-nav a.active { color: var(--fg); }
 </style>
 </head>
 <body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="active">Issue 01</a>
+  <a href="about.html">About the Web Team</a>
+</nav>
+
+<!-- STICKY TOC -->
+<nav class="toc" id="toc">
+  <a href="#numbers">By the Numbers</a>
+  <a href="#shipped">What Shipped</a>
+  <a href="#hood">Under the Hood</a>
+  <a href="#learnings">Learnings</a>
+  <a href="#shoutouts">Shoutouts</a>
+</nav>
 
 <!-- HERO -->
 <div class="hero">
@@ -400,7 +510,7 @@
 <div class="dont-sleep">
   <div class="dont-sleep-label">TLDR</div>
   <p class="dont-sleep-headline">If you read nothing else</p>
-  <p class="dont-sleep-body">Hey you — don't sleep on web. Web is a growth engine. A 10% lift in session-to-MQL conversion on plaid.com translates to millions in incremental pipeline. This isn't a marketing site — it's the front door to every product launch, campaign, and industry narrative Plaid puts into the world.</p>
+  <p class="dont-sleep-body">Hey you — don't sleep on web. Web is a growth engine. A 10% lift in session-to-MQL conversion on plaid.com translates to about $2.4 million in incremental pipeline. This isn't a marketing site — it's the front door to every product launch, campaign, and industry narrative Plaid puts into the world.</p>
   <p class="dont-sleep-body">In January and February alone: 12+ customer-facing surfaces shipped, a site-wide nav experiment launched, two major dependency upgrades landed, and Plaid's AI story finally had a home on the web.</p>
   <p class="dont-sleep-body">The web team threw down. Here's the receipts.</p>
 </div>
@@ -408,7 +518,7 @@
 <div class="container">
 
   <!-- BY THE NUMBERS -->
-  <section>
+  <section id="numbers">
     <div class="section-header">
       <div class="section-title">By the <span class="accent">numbers</span></div>
       <div class="section-label">Jan–Feb 2026</div>
@@ -434,7 +544,7 @@
   </section>
 
   <!-- WHAT SHIPPED -->
-  <section>
+  <section id="shipped">
     <div class="section-header">
       <div class="section-title">What <span class="accent">shipped</span></div>
       <div class="section-label">12+ surfaces</div>
@@ -535,7 +645,7 @@
   </section>
 
   <!-- UNDER THE HOOD -->
-  <section>
+  <section id="hood">
     <div class="section-header">
       <div class="section-title">Under the <span class="accent">hood</span></div>
       <div class="section-label">Platform & eng</div>
@@ -576,7 +686,7 @@
   </section>
 
   <!-- LEARNINGS -->
-  <section>
+  <section id="learnings">
     <div class="section-header">
       <div class="section-title">Learnings &amp; <span class="accent">experiments</span></div>
       <div class="section-label">4 takeaways</div>
@@ -612,7 +722,7 @@
   </section>
 
   <!-- SHOUTOUTS -->
-  <section>
+  <section id="shoutouts">
     <div class="section-header">
       <div class="section-title">Shout<span class="accent">outs</span> 👏</div>
       <div class="section-label">Well deserved</div>
@@ -633,6 +743,14 @@
       <div class="shoutout-body">For actually using experiments to answer real design questions instead of just shipping and hoping. The <a href="https://plaid.com/products/auth/">Auth short-form</a> result alone was worth it.</div>
     </div>
   </section>
+
+  <!-- ISSUE ARCHIVE -->
+  <div class="archive">
+    <div class="archive-title">All Issues</div>
+    <ul class="archive-list">
+      <li><a href="index.html" class="current">Issue 01 — Jan &amp; Feb 2026</a></li>
+    </ul>
+  </div>
 
   <!-- FOOTER -->
   <div class="footer">
@@ -690,6 +808,21 @@
   resize();
   window.addEventListener('resize', () => { resize(); });
   draw();
+
+  // TOC scroll spy
+  const tocLinks = document.querySelectorAll('.toc a');
+  const sections = document.querySelectorAll('section[id]');
+  function updateToc() {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    tocLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateToc, { passive: true });
+  updateToc();
 </script>
 </body>
 </html>
