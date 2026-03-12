@@ -1,607 +1,693 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Web We Weave — Issue 01</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2e;
+    --navy-mid: #122035;
+    --navy-card: #152338;
+    --navy-border: #1e3050;
+    --fg: #ffffff;
+    --mid: #8ba3be;
+    --dim: #4a6580;
+    --teal: #3ecfcf;
+    --teal-soft: #2ab8c4;
+    --rule: #1a2f48;
+    --tag-bg: #3ecfcf;
+    --tag-fg: #0d1b2e;
+  }
+
+  body {
+    background: var(--navy);
+    color: var(--fg);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    padding: 0 1.25rem 5rem;
+  }
+
+  a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--dim); transition: text-decoration-color 0.15s; }
+  a:hover { text-decoration-color: var(--teal); color: var(--teal); }
+
+  /* ── HERO ── */
+  .hero {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 0 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-canvas-wrap {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    margin-bottom: -1rem;
+  }
+
+  #waveCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.75rem, 8vw, 5rem);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin: 1.25rem 0 0.75rem;
+  }
+  .hero h1 .accent { color: var(--teal); font-weight: 700; }
+
+  .hero-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* ── DON'T SLEEP ON WEB ── */
+  .dont-sleep {
+    max-width: 760px;
+    margin: 2.5rem auto 0;
+    background: var(--teal);
+    border-radius: 16px;
+    padding: 2.25rem 2.5rem;
+  }
+  .dont-sleep-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.45);
+    margin-bottom: 0.75rem;
+  }
+  .dont-sleep-headline {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: #000;
+    margin-bottom: 1rem;
+  }
+  .dont-sleep-body {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: rgba(0,0,0,0.7);
+    margin-bottom: 0.6rem;
+  }
+  .dont-sleep-body:last-child { margin-bottom: 0; }
+
+
+  .welcome {
+    max-width: 760px;
+    margin: 0 auto 0;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 1.25rem 1.75rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+  .welcome-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-top: 0.1rem;
+  }
+  .welcome-body { flex: 1; }
+  .welcome p {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--mid);
+    display: inline;
+  }
+  .welcome p + p::before { content: ' '; }
+  .welcome-sig {
+    display: inline;
+    font-size: 0.82rem;
+    color: var(--dim);
+    font-weight: 500;
+  }
+
+  /* ── ISSUE BANNER ── */
+  .issue-banner {
+    max-width: 760px;
+    margin: 1.5rem auto 0;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1rem 1.5rem;
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-radius: 12px;
+  }
+  .issue-banner-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+    flex-shrink: 0;
+  }
+  .issue-banner-rule { flex: 1; height: 1px; background: var(--rule); }
+  .issue-banner-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+
+  /* ── CONTAINER ── */
+  .container { max-width: 760px; margin: 0 auto; }
+  section { padding: 3rem 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 1rem;
+  }
+  .section-title {
+    font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+  .section-title .accent { color: var(--teal); }
+  .section-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+    white-space: nowrap;
+  }
+
+  /* ── STAT BAR ── */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .stat {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1.5rem 1.5rem;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .stat:first-child { border-radius: 13px 0 0 13px; }
+  .stat:last-child { border-radius: 0 13px 13px 0; }
+  .stat-number {
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--teal);
+  }
+  .stat-label {
+    font-size: 0.68rem;
+    color: var(--mid);
+    margin-top: 0.4rem;
+    line-height: 1.4;
+  }
+
+  /* ── SHIP GROUPS ── */
+  .ship-group {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-radius: 14px;
+    padding: 0 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .ship-group:last-child { margin-bottom: 0; }
+  .ship-group-title {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal);
+    padding: 1rem 0 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ship {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.2rem 1rem;
+    align-items: start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ship:last-child { border-bottom: none; }
+  .ship-name { font-size: 0.95rem; font-weight: 600; line-height: 1.3; }
+  .ship-name a { text-decoration: none; }
+  .ship-name a:hover { color: var(--teal); }
+  .ship-desc { font-size: 0.82rem; color: var(--mid); margin-top: 0.2rem; grid-column: 1; line-height: 1.55; }
+  .ship-link {
+    font-size: 0.6rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--dim); text-decoration: none;
+    white-space: nowrap; padding-top: 0.2rem;
+    transition: color 0.15s;
+  }
+  .ship-link:hover { color: var(--teal); }
+  .ship-preview {
+    grid-column: 1 / -1;
+    margin-top: 0.6rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--navy-border);
+  }
+  .ship-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── LEARNINGS ── */
+  .learning {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1.75rem 1fr;
+    gap: 0 0.75rem;
+  }
+  .learning:last-child { border-bottom: none; }
+  .learning-icon { font-size: 0.95rem; padding-top: 0.1rem; }
+  .learning-text strong { font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 0.3rem; }
+  .learning-text p { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
+
+  /* ── NEXT ── */
+  .next-item {
+    display: flex; justify-content: space-between;
+    align-items: center; padding: 1rem 0;
+    border-bottom: 1px solid var(--rule); gap: 1rem;
+  }
+  .next-item:last-child { border-bottom: none; }
+  .next-name { font-size: 0.9rem; font-weight: 600; }
+  .next-desc { font-size: 0.8rem; color: var(--mid); margin-top: 0.2rem; }
+  .tag {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; background: var(--tag-bg);
+    color: var(--tag-fg); padding: 0.3rem 0.7rem;
+    border-radius: 999px; white-space: nowrap; flex-shrink: 0;
+  }
+  .tag.soon {
+    background: transparent; color: var(--mid);
+    border: 1px solid var(--dim);
+  }
+
+  /* ── SHOUTOUTS ── */
+  .shoutout {
+    padding: 1.5rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    margin-bottom: 0.75rem;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+  }
+  .shoutout:last-child { margin-bottom: 0; }
+  .shoutout-award {
+    font-size: 0.6rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 0.5rem;
+  }
+  .shoutout-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .shoutout-body { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 2.5rem 0 0;
+    font-size: 0.72rem;
+    color: var(--mid);
+    line-height: 1.7;
+    border-top: 1px solid var(--rule);
+  }
+</style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1">&lt;title&gt;The Web We Weave — Issue 01&lt;/title&gt;</p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--navy: #0d1b2e;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--navy-mid: #122035;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--navy-card: #152338;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--navy-border: #1e3050;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--fg: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--mid: #8ba3be;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--dim: #4a6580;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--teal: #3ecfcf;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--teal-soft: #2ab8c4;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--rule: #1a2f48;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--tag-bg: #3ecfcf;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--tag-fg: #0d1b2e;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--navy);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--fg);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Inter', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 0 1.25rem 5rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--dim); transition: text-decoration-color 0.15s; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>a:hover { text-decoration-color: var(--teal); color: var(--teal); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── HERO ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>max-width: 760px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 0 0 3rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero-canvas-wrap {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>height: 220px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: -1rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>#waveCanvas {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>height: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero-meta {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.62rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding-top: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-top: 1px solid var(--rule);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero h1 {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: clamp(2.75rem, 8vw, 5rem);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.03em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin: 1.25rem 0 0.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero h1 .accent { color: var(--teal); font-weight: 700; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.hero-sub {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.65rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── WELCOME ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.welcome {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>max-width: 760px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.04);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(12px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>-webkit-backdrop-filter: blur(12px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(255,255,255,0.08);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 1.25rem 1.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>align-items: baseline;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.welcome-label {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.6rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>white-space: nowrap;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding-top: 0.1rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.welcome-body { flex: 1; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.welcome p {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.82rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.65;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: inline;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.welcome p + p::before { content: ' '; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.welcome-sig {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: inline;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.82rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--dim);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── ISSUE BANNER ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.issue-banner {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>max-width: 760px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin: 1.5rem auto 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 1.25rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 1rem 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--navy-card);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--navy-border);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.issue-banner-label {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.62rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.issue-banner-rule { flex: 1; height: 1px; background: var(--rule); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.issue-banner-title {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.8rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.1em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--teal);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── CONTAINER ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.container { max-width: 760px; margin: 0 auto; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>section { padding: 3rem 0; border-bottom: 1px solid var(--rule); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>section:last-of-type { border-bottom: none; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── SECTION HEADER ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section-header {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>align-items: baseline;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section-title {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: clamp(1.75rem, 4.5vw, 2.75rem);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.025em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.05;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section-title .accent { color: var(--teal); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section-label {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.62rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>white-space: nowrap;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── STAT BAR ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.stat-bar {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 1px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--rule);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--rule);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.stat {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.03);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(12px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>-webkit-backdrop-filter: blur(12px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 1.5rem 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.stat:first-child { border-radius: 13px 0 0 13px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.stat:last-child { border-radius: 0 13px 13px 0; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.stat-number {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 2.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.04em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--teal);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.stat-label {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.68rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 0.4rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.4;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── SHIP GROUPS ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship-group {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--navy-card);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--navy-border);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 0 1.25rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship-group:last-child { margin-bottom: 0; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship-group-title {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.62rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.16em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--teal);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 1rem 0 0.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--rule);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: 1fr auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 0.2rem 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>align-items: start;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 1rem 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--rule);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship:last-child { border-bottom: none; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship-name { font-size: 0.95rem; font-weight: 600; line-height: 1.3; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship-name a { text-decoration: none; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship-name a:hover { color: var(--teal); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship-desc { font-size: 0.82rem; color: var(--mid); margin-top: 0.2rem; grid-column: 1; line-height: 1.55; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship-link {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.6rem; font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.12em; text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--dim); text-decoration: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>white-space: nowrap; padding-top: 0.2rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transition: color 0.15s;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.ship-link:hover { color: var(--teal); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── LEARNINGS ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.learning {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 1.25rem 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--rule);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: 1.75rem 1fr;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 0 0.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.learning:last-child { border-bottom: none; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.learning-icon { font-size: 0.95rem; padding-top: 0.1rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.learning-text strong { font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 0.3rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.learning-text p { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── NEXT ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.next-item {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex; justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>align-items: center; padding: 1rem 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--rule); gap: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.next-item:last-child { border-bottom: none; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.next-name { font-size: 0.9rem; font-weight: 600; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.next-desc { font-size: 0.8rem; color: var(--mid); margin-top: 0.2rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.tag {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase; background: var(--tag-bg);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--tag-fg); padding: 0.3rem 0.7rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 999px; white-space: nowrap; flex-shrink: 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.tag.soon {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: transparent; color: var(--mid);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--dim);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── SHOUTOUTS ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.shoutout {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 1.5rem 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(255,255,255,0.08);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 0.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.04);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(16px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>-webkit-backdrop-filter: blur(16px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.shoutout:last-child { margin-bottom: 0; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.shoutout-award {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.6rem; font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.14em; text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid); margin-bottom: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.shoutout-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.shoutout-body { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* ── FOOTER ── */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.footer {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 2.5rem 0 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 0.72rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--mid);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.7;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-top: 1px solid var(--rule);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- HERO --&gt;</p>
-<p class="p1">&lt;div class="hero"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hero-canvas-wrap"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;canvas id="waveCanvas"&gt;&lt;/canvas&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hero-meta"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;span&gt;The Web We Weave&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;span&gt;Issue 01 &amp;nbsp;·&amp;nbsp; Jan–Feb 2026&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;The web we &lt;span class="accent"&gt;weave&lt;/span&gt;&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hero-sub"&gt;A monthly digest from the Plaid web team&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- WELCOME --&gt;</p>
-<p class="p1">&lt;div class="welcome"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="welcome-label"&gt;Note&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="welcome-body"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;Welcome to The Web We Weave, a monthly window into what's happening on plaid.com. Web moves fast and a lot of it happens quietly. This first issue covers January and February — a lot shipped (aka the web team threw down). Serious, zero shame about the double debut.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="welcome-sig"&gt; — The web team 🕸️&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- ISSUE BANNER --&gt;</p>
-<p class="p1">&lt;div class="issue-banner"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="issue-banner-label"&gt;Issue 01&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="issue-banner-rule"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="issue-banner-title"&gt;January &amp;amp; February 2026&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="container"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- BY THE NUMBERS --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;By the &lt;span class="accent"&gt;numbers&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-label"&gt;Jan–Feb 2026&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="stat-bar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-number"&gt;12+&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-label"&gt;Customer-facing surfaces shipped&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-number"&gt;7&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-label"&gt;Net-new or fully revamped use case pages&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-number"&gt;2&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-label"&gt;New industry pillars&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-number"&gt;3&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-label"&gt;Nav variants live in experiment&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- WHAT SHIPPED --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;What &lt;span class="accent"&gt;shipped&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-label"&gt;12+ surfaces&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ship-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship-group-title"&gt;Payments&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank"&gt;Outbound Bank Payments&lt;/a&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;A revamped story for getting money out the door: auto rail selection, instant account verification, and fraud signals that keep payouts moving.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank"&gt;View →&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank"&gt;Inbound Bank Payments&lt;/a&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;The other side of the flow. Higher-converting bank checkout, fewer failures, and real-time balance checks that make pay-by-bank predictable.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank"&gt;View →&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ship-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship-group-title"&gt;Financial Management&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/use-cases/earned-wage-access/" target="_blank"&gt;Earned Wage Access (EWA)&lt;/a&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;How Plaid helps EWA providers qualify more users, assess repayment risk from real cash-flow data, and reduce losses with better timing.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/use-cases/earned-wage-access/" target="_blank"&gt;View →&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank"&gt;Personal Financial Management (PFM)&lt;/a&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;The "how top personal finance apps are built" page — clean enriched data, real-time transaction sync, AI-enhanced categorization.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank"&gt;View →&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/use-cases/business-financial-management/" target="_blank"&gt;Business Financial Management (BFM)&lt;/a&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;A cash-flow and expense story for SMBs: structured business data, real-time balances, and smoother payroll and invoice flows.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/use-cases/business-financial-management/" target="_blank"&gt;View →&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ship-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship-group-title"&gt;Industries&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/industries/insurance/" target="_blank"&gt;Insurance&lt;/a&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;A full-funnel industry pillar covering fraud, premium collection, payouts, and underwriting — from quote to claim.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/industries/insurance/" target="_blank"&gt;View →&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/industries/ai/" target="_blank"&gt;AI Companies&lt;/a&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;The first page built for AI-first builders: real financial context for agents, identity and access controls, pay-by-bank rails for agentic commerce.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/industries/ai/" target="_blank"&gt;View →&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ship-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship-group-title"&gt;AI &amp;amp; Intelligent Finance&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/intelligent-finance/" target="_blank"&gt;Intelligent Finance Hub&lt;/a&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;Plaid's first full-stack public AI story. Defines intelligent finance, introduces &lt;a href="https://plaid.com/intelligent-finance/"&gt;Plaid Intelligence&lt;/a&gt;, and positions Plaid at the infrastructure layer — not as another AI app.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/intelligent-finance/" target="_blank"&gt;View →&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ship-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship-group-title"&gt;Everything else&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="ship"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-name"&gt;&lt;a href="https://plaid.com/products/" target="_blank"&gt;All Products Page&lt;/a&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ship-desc"&gt;A new front door into everything Plaid sells — launched alongside the nav experiment to replace the scattered product-page experience. &lt;em style="color:var(--teal);font-style:normal;"&gt;Note: already being reworked for a March relaunch.&lt;/em&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="ship-link" href="https://plaid.com/products/" target="_blank"&gt;View →&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- LEARNINGS --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;Learnings &amp;amp; &lt;span class="accent"&gt;experiments&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-label"&gt;4 takeaways&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="learning"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-icon"&gt;📐&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-text"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;Shorter pages convert better for paid traffic&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;An experiment sent 50% of paid traffic to a shortened &lt;a href="https://plaid.com/products/auth/"&gt;Auth product page&lt;/a&gt; and produced a statistically significant conversion lift — enough to make it the default for that segment. The CTA-first, cut-the-fat approach works when the audience already has intent.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="learning"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-icon"&gt;🧭&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-text"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;The right IA is still an open question — so it's being tested&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;A site-wide nav experiment is live with three variants across desktop and mobile, split via LaunchDarkly with results flowing into Databricks. The core question: how should plaid.com be structured to tell a product + solution + industry story without losing people? Real data incoming.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="learning"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-icon"&gt;🗺️&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-text"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;Use case pages are now reusable patterns, not one-offs&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Payments and Financial Management established a repeatable structure: context → value → how it works → proof. Written for the practitioner, not the API. A solid reference for the next wave of use case pages.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="learning"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-icon"&gt;🤖&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="learning-text"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;strong&gt;AI copy needs scaffolding, not buzzwords&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;The &lt;a href="https://plaid.com/intelligent-finance/"&gt;Intelligent Finance launch&lt;/a&gt; set a tone for AI writing at Plaid: more explanation, clearer hierarchy, less "AI-powered everything." Anchoring to the infrastructure layer — data + models + trust — gave the copy something concrete to stand on.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- SHOUTOUTS --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;Shout&lt;span class="accent"&gt;outs&lt;/span&gt; 👏&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-label"&gt;Well deserved&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="shoutout"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-award"&gt;🏆 Ship of the bimonth&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-title"&gt;Plaid's AI story, live on the site&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-body"&gt;Between the &lt;a href="https://plaid.com/intelligent-finance/"&gt;Intelligent Finance hub&lt;/a&gt; and the new &lt;a href="https://plaid.com/industries/ai/"&gt;AI Companies industry page&lt;/a&gt;, this was the month Plaid's AI narrative finally had a home on the web. Two pages, one cohesive point of view: Plaid as the financial infrastructure layer that makes AI in finance actually work.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="shoutout"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-award"&gt;🔁 Pattern of the bimonth&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-title"&gt;Use case + industry web system&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-body"&gt;Seven pages. Two industry pillars. One repeatable structure that didn't exist six months ago. Use case storytelling finally lives on the site, not just in decks. See it: &lt;a href="https://plaid.com/use-cases/inbound-bank-payments/"&gt;Inbound&lt;/a&gt;, &lt;a href="https://plaid.com/use-cases/outbound-bank-payments/"&gt;Outbound&lt;/a&gt;, &lt;a href="https://plaid.com/use-cases/earned-wage-access/"&gt;EWA&lt;/a&gt;, &lt;a href="https://plaid.com/use-cases/personal-financial-insights/"&gt;PFM&lt;/a&gt;, &lt;a href="https://plaid.com/use-cases/business-financial-management/"&gt;BFM&lt;/a&gt;, &lt;a href="https://plaid.com/industries/insurance/"&gt;Insurance&lt;/a&gt;, &lt;a href="https://plaid.com/industries/ai/"&gt;AI companies&lt;/a&gt;.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="shoutout"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-award"&gt;🧪 Experiment of the bimonth&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-title"&gt;Nav + Auth tests&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="shoutout-body"&gt;For actually using experiments to answer real design questions instead of just shipping and hoping. The &lt;a href="https://plaid.com/products/auth/"&gt;Auth short-form&lt;/a&gt; result alone was worth it.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- FOOTER --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="footer"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;&lt;strong&gt;The Web We Weave&lt;/strong&gt; is a monthly digest from the Plaid web team — rounding up what shipped, what was learned, and what's coming on plaid.com. Questions or additions? Drop them in &lt;strong&gt;#website-open&lt;/strong&gt;.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const canvas = document.getElementById('waveCanvas');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const ctx = canvas.getContext('2d');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function resize() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>canvas.width = canvas.offsetWidth * window.devicePixelRatio;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>canvas.height = canvas.offsetHeight * window.devicePixelRatio;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.scale(window.devicePixelRatio, window.devicePixelRatio);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>let t = 0;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>function draw() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const w = canvas.offsetWidth, h = canvas.offsetHeight;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>ctx.clearRect(0, 0, w, h);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const waves = [</p>
-<p class="p1"><span class="Apple-converted-space">      </span>{ amp: 28, freq: 0.012, speed: 0.018, color: 'rgba(62,207,207,0.35)', offset: 0 },</p>
-<p class="p1"><span class="Apple-converted-space">      </span>{ amp: 20, freq: 0.016, speed: 0.025, color: 'rgba(42,184,196,0.25)', offset: 1.2 },</p>
-<p class="p1"><span class="Apple-converted-space">      </span>{ amp: 18, freq: 0.009, speed: 0.012, color: 'rgba(120,100,220,0.2)', offset: 2.5 },</p>
-<p class="p1"><span class="Apple-converted-space">      </span>{ amp: 14, freq: 0.02,<span class="Apple-converted-space">  </span>speed: 0.03,<span class="Apple-converted-space">  </span>color: 'rgba(62,207,180,0.15)', offset: 0.7 },</p>
-<p class="p1"><span class="Apple-converted-space">    </span>];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const lineCount = 18;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>waves.forEach(wave =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>for (let i = 0; i &lt; lineCount; i++) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const yBase = (h / (lineCount - 1)) * i;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const spread = (i - lineCount / 2) / (lineCount / 2);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.beginPath();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.strokeStyle = wave.color;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.lineWidth = 0.8;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>for (let x = 0; x &lt;= w; x += 3) {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const y = yBase</p>
-<p class="p1"><span class="Apple-converted-space">            </span>+ Math.sin(x * wave.freq + t * wave.speed + wave.offset + spread * 1.5) * wave.amp * (1 - Math.abs(spread) * 0.4)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>+ Math.sin(x * wave.freq * 0.5 + t * wave.speed * 0.7) * wave.amp * 0.3;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ctx.stroke();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>t++;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>requestAnimationFrame(draw);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>resize();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>window.addEventListener('resize', () =&gt; { resize(); });</p>
-<p class="p1"><span class="Apple-converted-space">  </span>draw();</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-canvas-wrap">
+    <canvas id="waveCanvas"></canvas>
+  </div>
+  <div class="hero-meta">
+    <span>The Web We Weave</span>
+    <span>Issue 01 &nbsp;·&nbsp; Jan–Feb 2026</span>
+  </div>
+  <h1>The web we <span class="accent">weave</span></h1>
+  <div class="hero-sub">A monthly digest from the Plaid web team</div>
+</div>
+
+<!-- WELCOME -->
+<div class="welcome">
+  <div class="welcome-label">Note</div>
+  <div class="welcome-body">
+    <p>Welcome to The Web We Weave, a monthly window into what's happening on plaid.com. Web moves fast and a lot of it happens quietly. This first issue covers January and February — a lot shipped (aka the web team threw down). Serious, zero shame about the double debut.</p>
+  </div>
+</div>
+
+<!-- ISSUE BANNER -->
+<div class="issue-banner">
+  <div class="issue-banner-label">Issue 01</div>
+  <div class="issue-banner-rule"></div>
+  <div class="issue-banner-title">January &amp; February 2026</div>
+</div>
+
+<!-- DON'T SLEEP ON WEB -->
+<div class="dont-sleep">
+  <div class="dont-sleep-label">TLDR</div>
+  <p class="dont-sleep-headline">If you read nothing else</p>
+  <p class="dont-sleep-body">Hey you — don't sleep on web. Web is a growth engine. A 10% lift in session-to-MQL conversion on plaid.com translates to millions in incremental pipeline. This isn't a marketing site — it's the front door to every product launch, campaign, and industry narrative Plaid puts into the world.</p>
+  <p class="dont-sleep-body">In January and February alone: 12+ customer-facing surfaces shipped, a site-wide nav experiment launched, two major dependency upgrades landed, and Plaid's AI story finally had a home on the web.</p>
+  <p class="dont-sleep-body">The web team threw down. Here's the receipts.</p>
+</div>
+
+<div class="container">
+
+  <!-- BY THE NUMBERS -->
+  <section>
+    <div class="section-header">
+      <div class="section-title">By the <span class="accent">numbers</span></div>
+      <div class="section-label">Jan–Feb 2026</div>
+    </div>
+    <div class="stat-bar">
+      <div class="stat">
+        <div class="stat-number">12+</div>
+        <div class="stat-label">Customer-facing surfaces shipped</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">7</div>
+        <div class="stat-label">Net-new or fully revamped use case pages</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">2</div>
+        <div class="stat-label">New industry pillars</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Nav variants live in experiment</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT SHIPPED -->
+  <section>
+    <div class="section-header">
+      <div class="section-title">What <span class="accent">shipped</span></div>
+      <div class="section-label">12+ surfaces</div>
+    </div>
+
+    <div class="ship-group">
+      <div class="ship-group-title">Payments</div>
+      <div class="ship">
+        <div>
+          <div class="ship-name"><a href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank">Outbound Bank Payments</a></div>
+          <div class="ship-desc">A revamped story for getting money out the door: auto rail selection, instant account verification, and fraud signals that keep payouts moving.</div>
+        </div>
+        <a class="ship-link" href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank">View →</a>
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/outbound-bank-payments/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/5EijeT5ag6FvNpNTXkI0Pd/67817c08ce59a71e64dda756c01dee8f/module-OpenGraph.png" alt="Outbound Bank Payments"></a></div>
+      </div>
+      <div class="ship">
+        <div>
+          <div class="ship-name"><a href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank">Inbound Bank Payments</a></div>
+          <div class="ship-desc">The other side of the flow. Higher-converting bank checkout, fewer failures, and real-time balance checks that make pay-by-bank predictable.</div>
+        </div>
+        <a class="ship-link" href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank">View →</a>
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/inbound-bank-payments/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/3EdPPcpLGDWu1RTdJPXdpL/c806a4e297b9823fd1eeb072d2571a0b/module-OpenGraph.png" alt="Inbound Bank Payments"></a></div>
+      </div>
+    </div>
+
+    <div class="ship-group">
+      <div class="ship-group-title">Financial Management</div>
+      <div class="ship">
+        <div>
+          <div class="ship-name"><a href="https://plaid.com/use-cases/earned-wage-access/" target="_blank">Earned Wage Access (EWA)</a></div>
+          <div class="ship-desc">How Plaid helps EWA providers qualify more users, assess repayment risk from real cash-flow data, and reduce losses with better timing.</div>
+        </div>
+        <a class="ship-link" href="https://plaid.com/use-cases/earned-wage-access/" target="_blank">View →</a>
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/earned-wage-access/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2nQJlVfT5vlYOtNk5OnSmt/a6f20b04eb6f106442f03c932929dda4/module-OpenGraph.png" alt="Earned Wage Access"></a></div>
+      </div>
+      <div class="ship">
+        <div>
+          <div class="ship-name"><a href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank">Personal Financial Management (PFM)</a></div>
+          <div class="ship-desc">The "how top personal finance apps are built" page — clean enriched data, real-time transaction sync, AI-enhanced categorization.</div>
+        </div>
+        <a class="ship-link" href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank">View →</a>
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/personal-financial-insights/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/5R9JAgib53spB5OFvjqUN4/db60cc464900e4d95bbfa216a09e455e/module-OpenGraph.png" alt="Personal Financial Management"></a></div>
+      </div>
+      <div class="ship">
+        <div>
+          <div class="ship-name"><a href="https://plaid.com/use-cases/business-financial-management/" target="_blank">Business Financial Management (BFM)</a></div>
+          <div class="ship-desc">A cash-flow and expense story for SMBs: structured business data, real-time balances, and smoother payroll and invoice flows.</div>
+        </div>
+        <a class="ship-link" href="https://plaid.com/use-cases/business-financial-management/" target="_blank">View →</a>
+        <div class="ship-preview"><a href="https://plaid.com/use-cases/business-financial-management/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4pjB7SBpTmT4xQqTW2NAXw/0f566cb5955ae374b0a0be061e753c61/module-OpenGraph.png" alt="Business Financial Management"></a></div>
+      </div>
+    </div>
+
+    <div class="ship-group">
+      <div class="ship-group-title">Industries</div>
+      <div class="ship">
+        <div>
+          <div class="ship-name"><a href="https://plaid.com/industries/insurance/" target="_blank">Insurance</a></div>
+          <div class="ship-desc">A full-funnel industry pillar covering fraud, premium collection, payouts, and underwriting — from quote to claim.</div>
+        </div>
+        <a class="ship-link" href="https://plaid.com/industries/insurance/" target="_blank">View →</a>
+        <div class="ship-preview"><a href="https://plaid.com/industries/insurance/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2ilm46Q8C42ruEQ6ew21hb/53df6c85c42ad026579acda3a1b5d109/module-OpenGraph.png" alt="Insurance"></a></div>
+      </div>
+      <div class="ship">
+        <div>
+          <div class="ship-name"><a href="https://plaid.com/industries/ai/" target="_blank">AI Companies</a></div>
+          <div class="ship-desc">The first page built for AI-first builders: real financial context for agents, identity and access controls, pay-by-bank rails for agentic commerce.</div>
+        </div>
+        <a class="ship-link" href="https://plaid.com/industries/ai/" target="_blank">View →</a>
+        <div class="ship-preview"><a href="https://plaid.com/industries/ai/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4O83rGJ6fc22aV9oTwyrhk/528a5d388ee0cc9d7c7ffd5396478116/module-OpenGraph.png" alt="AI Companies"></a></div>
+      </div>
+    </div>
+
+    <div class="ship-group">
+      <div class="ship-group-title">AI &amp; Intelligent Finance</div>
+      <div class="ship">
+        <div>
+          <div class="ship-name"><a href="https://plaid.com/intelligent-finance/" target="_blank">Intelligent Finance Hub</a></div>
+          <div class="ship-desc">Plaid's first full-stack public AI story. Defines intelligent finance, introduces <a href="https://plaid.com/intelligent-finance/">Plaid Intelligence</a>, and positions Plaid at the infrastructure layer — not as another AI app.</div>
+        </div>
+        <a class="ship-link" href="https://plaid.com/intelligent-finance/" target="_blank">View →</a>
+        <div class="ship-preview"><a href="https://plaid.com/intelligent-finance/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/4PolpLzZBZHi8zpvuy0fdo/9fe12de4836b2e59b95195576f42bb46/module-OpenGraph.png" alt="Intelligent Finance Hub"></a></div>
+      </div>
+
+    </div>
+
+    <div class="ship-group">
+      <div class="ship-group-title">Everything else</div>
+      <div class="ship">
+        <div>
+          <div class="ship-name"><a href="https://plaid.com/products/" target="_blank">All Products Page</a></div>
+          <div class="ship-desc">A new front door into everything Plaid sells — launched alongside the nav experiment to replace the scattered product-page experience. <em style="color:var(--teal);font-style:normal;">Note: already being reworked for a March relaunch.</em></div>
+        </div>
+        <a class="ship-link" href="https://plaid.com/products/" target="_blank">View →</a>
+        <div class="ship-preview"><a href="https://plaid.com/products/" target="_blank"><img src="https://images.ctfassets.net/ss5kfr270og3/2KmTE57CklaON0uT7mG8CW/1f7476f39291b2eb22d2ee8f9ba29d20/module-OpenGraph.png" alt="All Products Page"></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNDER THE HOOD -->
+  <section>
+    <div class="section-header">
+      <div class="section-title">Under the <span class="accent">hood</span></div>
+      <div class="section-label">Platform & eng</div>
+    </div>
+
+    <div class="learning">
+      <div class="learning-icon">⚛️</div>
+      <div class="learning-text">
+        <strong>React 18 + Next.js 14 finally landed</strong>
+        <p>Two major dependency upgrades shipped in January — React 17 → 18 and Next.js 12 → 14 — with significant help from AI tooling. The immediate payoff: Sentry errors dropped ~88% week over week. A long time coming and a meaningful unlock for what comes next.</p>
+      </div>
+    </div>
+
+    <div class="learning">
+      <div class="learning-icon">🔥</div>
+      <div class="learning-text">
+        <strong>Firewall tuning cut compute by ~98%</strong>
+        <p>Request middleware on plaid.com was updated to selectively process page requests rather than static assets — reducing compute by roughly 98% on an average page load. New rules were also added to challenge and block traffic on a client-by-client basis, with updated alerting to reduce on-call fatigue.</p>
+      </div>
+    </div>
+
+    <div class="learning">
+      <div class="learning-icon">🔗</div>
+      <div class="learning-text">
+        <strong>4,100 internal links being cleaned up</strong>
+        <p>A site-wide audit surfaced ~4,100 internal links resolving as redirects or errors. Remediation is underway to improve crawl efficiency and SEO health. The kind of unglamorous work that compounds over time.</p>
+      </div>
+    </div>
+
+    <div class="learning">
+      <div class="learning-icon">🛠️</div>
+      <div class="learning-text">
+        <strong>CMS runbook is now a slash command</strong>
+        <p>The CMS component checklist was converted into an invokable Cursor command — reducing manual errors and shortening component build cycles. Small lift, real impact.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- LEARNINGS -->
+  <section>
+    <div class="section-header">
+      <div class="section-title">Learnings &amp; <span class="accent">experiments</span></div>
+      <div class="section-label">4 takeaways</div>
+    </div>
+    <div class="learning">
+      <div class="learning-icon">📐</div>
+      <div class="learning-text">
+        <strong>Shorter pages convert better for paid traffic</strong>
+        <p>An experiment sent 50% of paid traffic to a shortened <a href="https://plaid.com/products/auth/">Auth product page</a> and produced a statistically significant conversion lift — enough to make it the default for that segment. The CTA-first, cut-the-fat approach works when the audience already has intent.</p>
+      </div>
+    </div>
+    <div class="learning">
+      <div class="learning-icon">🧭</div>
+      <div class="learning-text">
+        <strong>The right IA is still an open question — so it's being tested</strong>
+        <p>A site-wide nav experiment is live with three variants across desktop and mobile, split via LaunchDarkly with results flowing into Databricks. The core question: how should plaid.com be structured to tell a product + solution + industry story without losing people? Real data incoming.</p>
+      </div>
+    </div>
+    <div class="learning">
+      <div class="learning-icon">🗺️</div>
+      <div class="learning-text">
+        <strong>Use case pages are now reusable patterns, not one-offs</strong>
+        <p>Payments and Financial Management established a repeatable structure: context → value → how it works → proof. Written for the practitioner, not the API. A solid reference for the next wave of use case pages.</p>
+      </div>
+    </div>
+    <div class="learning">
+      <div class="learning-icon">🤖</div>
+      <div class="learning-text">
+        <strong>AI copy needs scaffolding, not buzzwords</strong>
+        <p>The <a href="https://plaid.com/intelligent-finance/">Intelligent Finance launch</a> set a tone for AI writing at Plaid: more explanation, clearer hierarchy, less "AI-powered everything." Anchoring to the infrastructure layer — data + models + trust — gave the copy something concrete to stand on.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOUTOUTS -->
+  <section>
+    <div class="section-header">
+      <div class="section-title">Shout<span class="accent">outs</span> 👏</div>
+      <div class="section-label">Well deserved</div>
+    </div>
+    <div class="shoutout">
+      <div class="shoutout-award">🏆 Ship of the bimonth</div>
+      <div class="shoutout-title">Plaid's AI story, live on the site</div>
+      <div class="shoutout-body">Between the <a href="https://plaid.com/intelligent-finance/">Intelligent Finance hub</a> and the new <a href="https://plaid.com/industries/ai/">AI Companies industry page</a>, this was the month Plaid's AI narrative finally had a home on the web. Two pages, one cohesive point of view: Plaid as the financial infrastructure layer that makes AI in finance actually work.</div>
+    </div>
+    <div class="shoutout">
+      <div class="shoutout-award">🔁 Pattern of the bimonth</div>
+      <div class="shoutout-title">Use case + industry web system</div>
+      <div class="shoutout-body">Seven pages. Two industry pillars. One repeatable structure that didn't exist six months ago. Use case storytelling finally lives on the site, not just in decks. See it: <a href="https://plaid.com/use-cases/inbound-bank-payments/">Inbound</a>, <a href="https://plaid.com/use-cases/outbound-bank-payments/">Outbound</a>, <a href="https://plaid.com/use-cases/earned-wage-access/">EWA</a>, <a href="https://plaid.com/use-cases/personal-financial-insights/">PFM</a>, <a href="https://plaid.com/use-cases/business-financial-management/">BFM</a>, <a href="https://plaid.com/industries/insurance/">Insurance</a>, <a href="https://plaid.com/industries/ai/">AI companies</a>.</div>
+    </div>
+    <div class="shoutout">
+      <div class="shoutout-award">🧪 Experiment of the bimonth</div>
+      <div class="shoutout-title">Nav + Auth tests</div>
+      <div class="shoutout-body">For actually using experiments to answer real design questions instead of just shipping and hoping. The <a href="https://plaid.com/products/auth/">Auth short-form</a> result alone was worth it.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p><strong>The Web We Weave</strong> is a monthly digest from the Plaid web team — rounding up what shipped, what was learned, and what's coming on plaid.com. Questions or additions? Drop them in <strong>#website-open</strong>.</p>
+  </div>
+
+</div>
+
+<script>
+  const canvas = document.getElementById('waveCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+    canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+
+  let t = 0;
+
+  function draw() {
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    ctx.clearRect(0, 0, w, h);
+
+    const waves = [
+      { amp: 28, freq: 0.012, speed: 0.018, color: 'rgba(62,207,207,0.35)', offset: 0 },
+      { amp: 20, freq: 0.016, speed: 0.025, color: 'rgba(42,184,196,0.25)', offset: 1.2 },
+      { amp: 18, freq: 0.009, speed: 0.012, color: 'rgba(120,100,220,0.2)', offset: 2.5 },
+      { amp: 14, freq: 0.02,  speed: 0.03,  color: 'rgba(62,207,180,0.15)', offset: 0.7 },
+    ];
+
+    const lineCount = 18;
+
+    waves.forEach(wave => {
+      for (let i = 0; i < lineCount; i++) {
+        const yBase = (h / (lineCount - 1)) * i;
+        const spread = (i - lineCount / 2) / (lineCount / 2);
+        ctx.beginPath();
+        ctx.strokeStyle = wave.color;
+        ctx.lineWidth = 0.8;
+        for (let x = 0; x <= w; x += 3) {
+          const y = yBase
+            + Math.sin(x * wave.freq + t * wave.speed + wave.offset + spread * 1.5) * wave.amp * (1 - Math.abs(spread) * 0.4)
+            + Math.sin(x * wave.freq * 0.5 + t * wave.speed * 0.7) * wave.amp * 0.3;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+    });
+
+    t++;
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize', () => { resize(); });
+  draw();
+</script>
 </body>
 </html>
